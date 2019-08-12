@@ -49,7 +49,12 @@ Uma grande limitação nos métodos de regressão é que eles em sua maioria sol
 \subsection{Classificação}
 \label{subsecao:2:1:2}
 
-Como definido anteriormente, o problema de classificação consiste em um problema de predição quando as saídas são discretas.
+Como definido anteriormente, o problema de classificação consiste em um problema de predição quando as saídas são discretas. A ideia dos algoritmos de classificação é definir para cada entrada, um rótulo ou classe no meio de um conjunto finito de rótulos. Um método estatístico muito utilizado nos problemas de classificação é a regressão logística. A regressão logística é bem similar à regressão linear, com a diferença que o resultado é um número entre zero e um, configurando na verdade, a probabilidade de, dado uma entrada $X$ tal que $X = {x_1, x_2, ..., x_n}$ gerar uma saída verdadeira para a hipótese $Y$. Normalmente, os modelos de regressão logística aplica a função sigmóide, descrita pela equação \ref{eq:eq3}:
+
+\begin{equation}
+\label{eq:eq3}
+Y = \dfrac{1}{1 + e^{-g(x)}}
+\end{equation}
 
 \section{Redes Neurais Artificiais}
 \label{secao:2:2}
@@ -62,11 +67,11 @@ As \ac{RNA} são uma das principais técnicas de aprendizagem de máquina e pode
 
 Além disso, é importante mencionar que em uma rede neural, existem duas camadas em particular que são muito importantes: a primeira camada, que é a camada de entrada de dados, e a última camada que é a camada de saída. Existem dois tipos de \ac{RNA}s: as redes \textit{feed forward}, que processamento sempre flui da entrada para a saída, e as redes recorrentes, que os dados fluem nos dois sentidos.
 
-A \ac{RNA} \textit{feed forward} mais básica que existe é a perceptron, composta apenas por um conjunto de neurônios de entrada e um único neurônio de saída. A Equação \ref{eq:eq3} representa a fórmula de um perceptron, onde $n$ é o número de entradas, $W_i$ são os respectivos pesos de cada entrada, $X_i$ são as entradas e $B$ é o Bias do neurônio.
+A \ac{RNA} \textit{feed forward} mais básica que existe é a perceptron, composta apenas por um conjunto de neurônios de entrada e um único neurônio de saída. A Equação \ref{eq:eq4} representa a fórmula de um perceptron, onde $n$ é o número de entradas, $W_i$ são os respectivos pesos de cada entrada, $X_i$ são as entradas e $B$ é o Bias do neurônio.
 
 \begin{equation}
 Y=\Big(\sum_{i=1}^{n}{(W_i \times X_i)}\Big) - B
-\label{eq:eq3}
+\label{eq:eq4}
 \end{equation}
 
 Uma rede percepron não é uma arquitetura de redes neurais artificiais muito poderosa, mas deu base para outras arquiteturas mais robustas. A principal delas, é o Perceptron Multi-Camadas.
@@ -81,7 +86,7 @@ Uma outra diferença das \ac{MLP}s para as perceptrons comuns é a equação par
 
 \begin{equation}
 Y= \dfrac{1}{1+e^z}
-\label{eq:eq4}
+\label{eq:eq5}
 \end{equation}
 
 Onde $z$ é descrito pela Equação \ref{eq:4}:
