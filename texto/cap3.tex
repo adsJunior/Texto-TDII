@@ -3,6 +3,10 @@
 \label{cap:3}
 \vspace{-1.9cm}
 
+%\section{\textit{\ac{DenseNet}}}
+
+%Como mencionado anteriormente, desde 2012 as tarefas de classificação de imagens são resolvidas majoritariamente por arquiteturas de \textit{Deep Learning}. \citeonline{liu-2017} propuseram uma arquitetura altamente robusta 
+
 \section{SSD: \textit{Single-Shot Multibox Detector}}
 
 \citeonline{wei-2015} propuseram um método a base de redes neurais convolucionais para fazer a localização e detecção de objetos. A proposta deles melhorou significativamente os resultados apresentados no estado da arte. Isso se deve ao fato de que eles não só conseguiram propor um modelo que faz a localização e classificação de forma eficiente (chegando a 74,3\% de acurácia), como conseguiram obter esse resultado fazendo classificação e localização em tempo real, com uma velocidade de 59 \ac{FPS}. Uma outra vantagem obtida por esse método é que ele consegue fazer a localização e classificação em imagens significativamente menores, uma vez que os quadros processados pelo \ac{YOLO} têm dimensões $448 \times 448$ e os processados pelo \ac{R-CNN} têm $1000\times 600$, o \ac{SSD} processa quadros de dimensões $300 \times 300$.
@@ -59,4 +63,4 @@ Nesse trabalho, foram propostas duas alterações principais no modelo \ac{SSD}.
 	\label{fig:dssdpred}
 \end{figure}
 
-Como mencionado anteriormente, embora o \ac{DSSD} tenha melhorado a acurácia do \ac{SSD}, ele não é aplicável para fazer a localização e classificação em tempo real. Com uma acurácia de $81,5\%$ ele consegue processar apenas $6,6$ \ac{FPS}. Isso se deve ao uso das deconvoluções, da ResNet 101 - que possui mais camada, e, portanto toma mais tempo de processamento - e também ao aumento no número de \textit{bounding boxes} geradas($43688$ vs. $17080$), fazendo assim com que a supressão de não-máximos leve mais tempo.
+Como mencionado anteriormente, embora o \ac{DSSD} tenha melhorado a acurácia do \ac{SSD}, ele não é aplicável para fazer a localização e classificação em tempo real. Com uma acurácia de $81,5\%$ ele consegue processar apenas $6,6$ \ac{FPS}. Isso se deve ao uso das deconvoluções, da ResNet 101 - que possui mais camadas, e, portanto toma mais tempo de processamento - e também ao aumento no número de \textit{bounding boxes} geradas($43688$ vs. $17080$), fazendo assim com que a supressão de não-máximos leve mais tempo.
