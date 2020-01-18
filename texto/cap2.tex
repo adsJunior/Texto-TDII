@@ -53,8 +53,25 @@ Como definido anteriormente, o problema de classificação consiste em um proble
 
 \begin{equation}
 \label{eq:eq3}
-Y = \dfrac{1}{1 + e^{-g(x)}}
+Y = \dfrac{1}{1 + e^{-g(X)}}
 \end{equation}
+
+A regressão logística se ajusta muito bem a problemas de classificação binária. Porém, a grande maioria dos problemas de classificação possuem mais de uma classe, consistindo então em dizer para uma entrada $X$ tal que $X = [x_1, x_2, ..., x_n]$ a qual classe de $Y$ ela pertence, tal que $Y = [y_1, y_2, ..., y_m]$. \citeonline{Thanh-2015} que as principais abordagens para solucionar problemas de classificação com $M$ classes consistem em dividir o problema em vários problemas de classificação binária.
+
+Essa divisão pode ser feita de duas formas diferentes: 
+\begin{itemize}
+	\item A primeira consiste em gerar $M - 1$ problemas de classificação binária e resolver cada um de forma independente. Após resolver os problemas de classificação, determinar a classe final a partir das probabilidades obtidas selecionando a classe que obteve a maior probabilidade. Essa abordagem é conhecida como \textit{one-versus-all}.
+	\item A segunda consiste em combinar as classes em pares e, para cada par de classe gerar um problema de classificação. Isto é, seja $Y$ um conjunto de classes, para cada classe $y \in Y$ criar um problema de classificação para $y$ e  cada $y_\beta$ tal que $y_\beta \in Y - [y]$. Isso gera um conjunto de $\frac{M (M - 1)}{2}$ problemas de classificação. Após gerar e solucionar os problemas, o resultado será a classe que for mais vezes selecionada.
+\end{itemize}
+
+Com base na primeira abordagem, começou a ser utilizada uma função para os problemas de classificação que envolvem múltiplas classes. Essa função é a \textit{softmax} que calcula o valor de cada saída e divide pela soma das saídas, gerando assim uma saída normalizada que corresponde à probabilidade de o dado de entrada estar na classe. Atualmente é a função mais utilizada para problemas de classificação com múltiplas classes e é descrita pela equação \ref{eq:eq4}.
+
+\begin{equation}
+\label{eq:eq4}
+	f(x)_i = \dfrac{e^{\beta x_i}}{\sum_{j = 1}^{K}e^{\beta x_j}} \forall i = 1,...,K e x = {x_1, ... ,x_k} \in X^K
+\end{equation}
+
+Assim como na regressão linear, a perda na regressão logística pode ser calculado pelo \ac{MLS}. Porém, com o tempo, surgiram outras funções que calculam a perda de forma mais eficiente em problemas de classificação.
 
 \section{Redes Neurais Artificiais}
 \label{secao:2:2}
@@ -67,11 +84,11 @@ As \ac{RNA} são uma das principais técnicas de aprendizagem de máquina e pode
 
 Além disso, é importante mencionar que em uma rede neural, existem duas camadas em particular que são muito importantes: a primeira camada, que é a camada de entrada de dados, e a última camada que é a camada de saída. Existem dois tipos de \ac{RNA}s: as redes \textit{feed forward}, que processamento sempre flui da entrada para a saída, e as redes recorrentes, que os dados fluem nos dois sentidos.
 
-A \ac{RNA} \textit{feed forward} mais básica que existe é a perceptron, composta apenas por um conjunto de neurônios de entrada e um único neurônio de saída. A Equação \ref{eq:eq4} representa a fórmula de um perceptron, onde $n$ é o número de entradas, $W_i$ são os respectivos pesos de cada entrada, $X_i$ são as entradas e $B$ é o Bias do neurônio.
+A \ac{RNA} \textit{feed forward} mais básica que existe é a perceptron, composta apenas por um conjunto de neurônios de entrada e um único neurônio de saída. A Equação \ref{eq:eq5} representa a fórmula de um perceptron, onde $n$ é o número de entradas, $W_i$ são os respectivos pesos de cada entrada, $X_i$ são as entradas e $B$ é o Bias do neurônio.
 
 \begin{equation}
 Y=\Big(\sum_{i=1}^{n}{(W_i \times X_i)}\Big) - B
-\label{eq:eq4}
+\label{eq:eq5}
 \end{equation}
 
 Uma rede percepron não é uma arquitetura de redes neurais artificiais muito poderosa, mas deu base para outras arquiteturas mais robustas. A principal delas, é o Perceptron Multi-Camadas.
@@ -82,30 +99,16 @@ Uma rede percepron não é uma arquitetura de redes neurais artificiais muito po
 
 A rede Perceptron Multicamadas ou \ac{MLP} são baseadas nos Perceptrons simples, como mencionado anteriormente. A diferença, porém, é que elas trabalham com mais camadas do que simplesmente as camadas de entrada e saída. Geralmente elas possuem uma ou duas camadas intermediárias às camadas externas. Essas camadas intermediárias, também são chamadas de camadas ocultas e servem para conferir uma robustez maior ao método.
 
-Uma outra diferença das \ac{MLP}s para as perceptrons comuns é a equação para calcular a saída de cada neurônio. Nas redes \ac{MLP}s, a equação utilizada é a função sigmóide. A Equação \ref{eq:eq4} descreve a fórmula da função sigmóide.
+Uma outra diferença das \ac{MLP}s para as perceptrons comuns é a equação para calcular a saída de cada neurônio. Nas redes \ac{MLP}s, a equação utilizada é a função sigmóide, descrita na seção \ref{subsecao:2:1:2}. No caso dos \ac{MLP}s o $g(x)$ é descrito pela Equação \ref{eq:eq:7}:
 
 \begin{equation}
-Y= \dfrac{1}{1+e^z}
-\label{eq:eq5}
-\end{equation}
-
-Onde $z$ é descrito pela Equação \ref{eq:4}:
-
-\begin{equation}
+\label{eq:eq:7}
 Z_{(i+1) j} = \Big(\sum_{k=1}^{n} (W_{i k}\times X_{i k})\Big)-B_j
-\label{eq:4}
 \end{equation}
 
 Onde $i$ é o número da camada, $j$ o neurônio de destino, $k$ o neurônio de origem, $W$ é o peso e $X$ a entrada.
 
-Como foi dito anteriormente, a \ac{MLP} trabalha com aprendizado supervisionado, isso quer dizer que os dados que ela opera são rotulados, e tem uma saída esperada. Quando as entradas são processadas e os resultados das saídas são calculados, eles são comparados com os valores esperados pelos rótulos e é gerado a função de erro quadrático, definida pela Equação \ref{eq:5}:
-
-\begin{equation}
-E=\dfrac{1}{2}\times \sum_{i=1}^{n}(Y_i-O_i)^2
-\label{eq:5}
-\end{equation}
-
-Onde $n$ é o número de saídas, $i$ é qual saída calculada, $Y$ são as saídas da rede e $O$ são as saídas esperadas.
+Como foi dito anteriormente, a \ac{MLP} trabalha com aprendizado supervisionado, isso quer dizer que os dados que ela opera são rotulados, e tem uma saída esperada. Quando as entradas são processadas e os resultados das saídas são calculados, eles são comparados com os valores esperados pelos rótulos e é gerado a função de erro quadrático, definida na seção \ref{subsecao:2:1:1}.
 
 Sabendo-se disso, o objetivo para melhorar a precisão da \ac{MLP} é minimizar o valor da função erro, ou seja, tornar as saídas da rede o mais próximo possível das saídas esperadas. Para tanto, é utilizado o método de retropropagação de erro que reajusta os pesos da rede de acordo com os valores obtidos usando a descida de gradiente.
 
