@@ -11,7 +11,7 @@
 
 \textit{Machine Learning} ou Aprendizado de Máquina é um campo de estudo cada vez mais recorrente na área de tecnologia. Em uma definição alternativa, pode-se dizer que ``Aprendizado de Máquina é uma área de Inteligência Artificial cujo objetivo é o desenvolvimento de técnicas computacionais sobre o aprendizado bem como a construção de sistemas capazes de adquirir conhecimento de forma automática'' \cite{monard-2003}. Entre as principais aplicações de Aprendizado de máquina, pode se destacar o reconhecimento de padrões, classificação de imagens e a mineração de dados. 
 
-\citeonline{monard-2003} define ainda que o aprendizado de máquina pode ser supervisionado ou não-supervisionado. Quando falamos do primeiro caso, queremos dizer que o algoritmo recebe um conjunto de dados na entrada, processa esses dados e retorna uma saída. Essa saída é comparada com um valor previamente associado à entrada, comumente conhecido como rótulo. Já no aprendizado não-supervisionado, as entradas não possuem rótulo algum, cabendo ao algoritmo fazer a distinção das diversas entradas. Geralmente nesses casos, é necessária uma análise posterior à execução do algoritmo para se entender os resultados obtidos.
+\citeonline{monard-2003} define ainda que o aprendizado de máquina pode ser supervisionado ou não-supervisionado. Quando falamos do primeiro caso, queremos dizer que o algoritmo recebe um conjunto de dados na entrada, processa esses dados e retorna uma saída. Essa saída é comparada com um valor previamente associado à entrada, comumente conhecido como rótulo. Já no aprendizado não-supervisionado, as entradas não possuem rótulo algum, cabendo ao algoritmo fazer a distinção das diversas entradas. Geralmente, nesses casos é necessária uma análise posterior à execução do algoritmo para se entender os resultados obtidos.
 
 O aprendizado supervisionado se divide em dois grupos menores: classificação e regressão. \citeonline{santos-2012} define que quando o problema possui um conjunto discreto de saídas e o objetivo é atribuir a qual dessas saídas a entrada pertence, se trata de um problema de classificação. \citeonline{santos-2012} define ainda que quando o objetivo é prever uma saída de valor contínuo pra uma entrada, se trata de um problema de regressão.
 
@@ -82,7 +82,7 @@ As \ac{RNA} são uma das principais técnicas de aprendizagem de máquina e pode
 	As \ac{RNA}s possuem inspiração nas redes neurais biológicas, constituídas de neurônios separados por camadas, que processam informações e estão conectados via pesos sinápticos, sendo na maioria das vezes sistemas adaptativos que modificam sua estrutura através de informações, que fluem pela rede durante a etapa de aprendizado \cite{jost-2015}.
 \end{citacao}
 
-Além disso, é importante mencionar que em uma rede neural, existem duas camadas em particular que são muito importantes: a primeira camada, que é a camada de entrada de dados, e a última camada que é a camada de saída. Existem dois tipos de \ac{RNA}s: as redes \textit{feed forward}, que processamento sempre flui da entrada para a saída, e as redes recorrentes, que os dados fluem nos dois sentidos.
+Além disso, é importante mencionar que em uma rede neural, existem duas camadas em particular que são muito importantes: a primeira camada, que é a camada de entrada de dados, e a última camada que é a camada de saída. Existem dois tipos de \ac{RNA}s: as redes \textit{feed forward}, que processa apenas o estado atual das entradas, e as redes neurais recorrentes que processa o estado atual e o estado anterior. As redes neurais recorrentes podem ser usadas de forma eficiente para processar vídeos, séries temporais e outros dados que possuam múltiplos estados.
 
 A \ac{RNA} \textit{feed forward} mais básica que existe é a perceptron, composta apenas por um conjunto de neurônios de entrada e um único neurônio de saída. A Equação \ref{eq:eq5} representa a fórmula de um perceptron, onde $n$ é o número de entradas, $W_i$ são os respectivos pesos de cada entrada, $X_i$ são as entradas e $B$ é o Bias do neurônio.
 
@@ -97,16 +97,19 @@ Uma rede percepron não é uma arquitetura de redes neurais artificiais muito po
 \label{subsecao:2:2:2}
 
 
-A rede Perceptron Multicamadas ou \ac{MLP} são baseadas nos Perceptrons simples, como mencionado anteriormente. A diferença, porém, é que elas trabalham com mais camadas do que simplesmente as camadas de entrada e saída. Geralmente elas possuem uma ou duas camadas intermediárias às camadas externas. Essas camadas intermediárias, também são chamadas de camadas ocultas e servem para conferir uma robustez maior ao método.
+As redes Perceptron Multicamadas ou \ac{MLP} são baseadas nos Perceptrons simples, como mencionado anteriormente. A diferença, porém, é que elas trabalham com mais camadas do que simplesmente as camadas de entrada e saída. Geralmente elas possuem uma ou duas camadas intermediárias às camadas externas. Essas camadas intermediárias, também são chamadas de camadas ocultas e servem para conferir uma robustez maior ao método.
 
-Uma outra diferença das \ac{MLP}s para as perceptrons comuns é a equação para calcular a saída de cada neurônio. Nas redes \ac{MLP}s, a equação utilizada é a função sigmóide, descrita na seção \ref{subsecao:2:1:2}. No caso dos \ac{MLP}s o $g(x)$ é descrito pela Equação \ref{eq:eq:7}:
+Nas \ac{MLP}s, uma outra diferença é que as funções de ativação podem variar. As mais comuns são o \ac{ReLU} (definido pela equação \ref{eq:eq6}), a função sigmóide (descrita na seção \ref{subsecao:2:1:2}) e a tangente hiperbólica (definida pela equação \ref{eq:eq7}).
 
 \begin{equation}
-\label{eq:eq:7}
-Z_{(i+1) j} = \Big(\sum_{k=1}^{n} (W_{i k}\times X_{i k})\Big)-B_j
+	Y(x) = max(0, x)
+	\label{eq:eq6}
 \end{equation}
 
-Onde $i$ é o número da camada, $j$ o neurônio de destino, $k$ o neurônio de origem, $W$ é o peso e $X$ a entrada.
+\begin{equation}
+	Y(x) = \dfrac{e^x - e^{-x}}{e^x+e^{-x}}
+	\label{eq:eq7}
+\end{equation}
 
 Como foi dito anteriormente, a \ac{MLP} trabalha com aprendizado supervisionado, isso quer dizer que os dados que ela opera são rotulados, e tem uma saída esperada. Quando as entradas são processadas e os resultados das saídas são calculados, eles são comparados com os valores esperados pelos rótulos e é gerado a função de erro quadrático, definida na seção \ref{subsecao:2:1:1}.
 
@@ -134,25 +137,9 @@ Ao contrário das \ac{RNA}s tradicionais (como \ac{MLP}), as \ac{CNN}s não nece
 
 A ideia da camada de convolução, é de que cada neurônio recebe como entrada neurônios próximos e tem por objetivo criar mapas e filtros. \citeonline{ferreira-2017} define que em aplicações de reconhecimento de objetos, por exemplo, é comum as primeiras camadas de convolução detectarem bordas ou manchas que seriam as características mais básicas da imagem. As camadas de convolução mais profundas, detectam outras características mais específicas.
 
-As camadas de pooling são utilizadas para reduzir a dimensão de dados vindo das camadas de convolução, consequentemente reduzindo o custo computacional \cite{ferreira-2017}. Um exemplo seria receber como entrada uma matriz 4x4 e enviar para a próxima camada uma matriz 2x2 escolhendo um representante de cada quatro da matriz de entrada para a matriz de saída, sendo que esse representante é determinado por alguma propriedade específica. As propriedades mais utilizadas são a de máximo e de média \cite{ferreira-2017}.
+As camadas de pooling são utilizadas para reduzir a dimensão de dados vindo das camadas de convolução, consequentemente reduzindo o custo computacional \cite{ferreira-2017}. NA prática elas funcionam como as camadas de convolução, mas ao invés de fazer a operação tradicional de convolução, elas reduzem um conjunto de elementos a um único representante com base em uma propriedade específica. As propriedades mais utilizadas são a de máximo e de média \cite{ferreira-2017}.
 
-Por fim, as camadas completamente conexas são exatamente iguais às redes MLP e é comum utilizá-las no final da rede para conectar à saída. Seu acréscimo no final é importante pois faz a ligação de todos os filtros \cite{ferreira-2017}. As arquiteturas de \ac{CNN}s geralmente intercalam algumas camadas de convolução com uma camada de pooling e com duas camadas completamente conexas ao final.
-
-\section{Imagem}
-\label{secao:2:4}
-
-\citeonline{torres-2006} definem uma imagem Î como sendo um par ($D_i$,$\vec{I}$) onde:
-%\vspace{-1.9cm}
-
-\begin{itemize}
-	\item $D_i$ é um conjunto finito de \ac{Pixels};
-	\item $\vec{I}$:$D_I$ $\mapsto $${R}$$^n$ é uma função que atribui para cada \textit{pixel} p em $D_i$ um vetor $\vec{I} \in R^n$ (quando uma cor RGB é atribuída a cada \textit{pixel}, por exemplo, podemos dizer que $\vec{I} \in R^3$).
-	
-\end{itemize}
-%\vspace{-1.9cm}
-
-Uma imagem digital pode ser considerada como a representação numérica da luz refletida em um determinado ponto representado no espaço. No caso de uma imagem em tons de cinza, a luz é amostrada em um ponto \textit{(X,Y)} e quantizada para um valor inteiro. Sendo colorida, a luz é quantizada para os valores de vermelho ou \textit{red}(R), verde ou \textit{green}(G) e azul ou \textsl{blue}(B), tendo então três componentes. Cada elemento amostrado é considerado um pixel da imagem. Sendo assim, \textit{$D_i$} representa a posição de cada ponto amostrado enquanto o vetor \textit{$\vec{I}$}, é uma função que mapeia cada pixel \textit{p} da imagem, em um valor real para todas as suas componentes, no caso R, G e B.
-
+Por fim, as camadas completamente conexas são exatamente iguais às redes MLP e é comum utilizá-las no final da rede para conectar à saída. Seu acréscimo no final é importante pois faz a ligação de todos os filtros \cite{ferreira-2017}. As arquiteturas de \ac{CNN}s geralmente intercalam algumas camadas de convolução com uma camada de pooling. As arquiteturas mais antigas costumavam adicionar camadas completamente conexas ao final, porém, os modelos mais novos, como a \ac{ResNet} e a \ac{DenseNet} já não usam mais esse conceito.
 
 
 %%%%%%%%%%%%%%%%%%% Formato para a inserção de figuras
