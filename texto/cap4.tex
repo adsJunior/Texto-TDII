@@ -14,7 +14,7 @@ A seguir, serão definidos os passos necessários para a elaboração do trabalh
 \subsection{Levantamento Bibliográfico}
 \label{subsecao:4:1:1}
 
-Nesta fase será feito um levantamento na literatura de tudo o que é necessário para realizar o trabalho proposto. Será feito um estudo para compreensão da arquitetura \ac{DenseNet} \cite{liu-2017}. Além disso, serão feitos estudos com métodos da literatura como \ac{YOLO} \cite{redmon-2015}, \ac{SSD} \cite{wei-2015} e \ac{DSSD} \cite{cheng-2017}. Serão feitos também estudos para analisar o conteúdo das bases de dados para testes. São essas: \ac{PASCAL VOC} \cite{everingham-2015} e \ac{COCO} \cite{lin-2014}. Além disso, nessa etapa serão levantadas as formas de avaliar os resultados dos algoritmos.
+Nesta fase será feito um levantamento na literatura de tudo o que é julgado necessário para realizar o trabalho proposto. Será feito um estudo para compreensão da arquitetura \ac{DenseNet} \cite{liu-2017}. Além disso, serão feitos estudos com métodos da literatura como \ac{YOLO} \cite{redmon-2015}, \ac{SSD} \cite{wei-2015} e \ac{DSSD} \cite{cheng-2017}. Serão feitos também estudos para analisar o conteúdo da base de dados para testes. A base utilizada será a \ac{PASCAL VOC} \cite{everingham-2015}. Além disso, nessa etapa serão levantadas as formas de avaliar os resultados dos algoritmos.
 
 \subsection{Testes e avaliações com métodos da literatura}
 \label{subsecao:4:1:2}
@@ -24,7 +24,7 @@ Nesta etapa serão feitos os testes com os métodos já implementados na literat
 \subsection{Desenvolvimento do protótipo inicial}
 \label{subsecao:4:1:3}
 
-A proposta é desenvolver um protótipo inicial usando a arquitetura da \ac{DenseNet}121 apresentada por \citeonline{liu-2017} com alterações. As alterações a ser feitas são a remoção da camada final de classificação e a inserção de camadas intermediárias de convolução para realizar a localização dos objetos em diferentes escalas, como apresentado por \citeonline{wei-2015}. A essa altura, a arquitetura já será capaz de fazer a localização e classificação dos objetos nas imagens.
+A proposta é desenvolver um protótipo inicial usando a arquitetura da \ac{DenseNet} 121 apresentada por \citeonline{liu-2017} com alterações. As alterações a ser feitas são a remoção da camada final de classificação e a inserção de camadas intermediárias de convolução para realizar a localização dos objetos em diferentes escalas, como apresentado por \citeonline{wei-2015}. Além disso, serão aplicadas as mesmas modificações aplicadas inicialmente na \ac{ResNet} 101 para gerar o primeiro modelo proposto por \cite{cheng-2017}.
 
 \subsection{Desenvolvimento da arquitetura final usando deconvolução}
 \label{subsecao:4:1:4}
@@ -65,3 +65,8 @@ O projeto será desenvolvido ao longo do ano 2019 seguindo o cronograma apresent
 	\vspace{0.1cm} 
 	{\footnotesize\\ \textbf{Fonte: Elaborado pelo autor}}
 \end{table}
+
+
+% Usar espaço para descrever base de testes, método de avaliação e fluxograma.
+
+
