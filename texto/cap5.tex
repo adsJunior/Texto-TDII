@@ -1,0 +1,15 @@
+% Nome do capítulo
+\chapter{Experimentos}
+% Label para referenciar
+\label{cap:5}
+% Diminuir espaçamento entre título e texto
+\vspace{-1.9cm}
+
+\section{SSD}
+\label{secao:5:1}
+
+A primeira implementação consiste em adaptar a \ac{DenseNet} 121 para realizar as tarefas de localização e classificação. Nesse estágio foi feita uma pequena alteração com relação aos modelos propostos por \citeonline{wei-2015} e por \citeonline{cheng-2017}. Enquanto que \citeonline{wei-2015} usou imagens de tamanho $300 \times 300$ e \citeonline{cheng-2017} usou imagens de tamanho $321\times 321$, foi usado nesse trabalho imagens de $311 \times 311$.
+
+O motivo é que, embora a \ac{DenseNet} possua as mesmas características de \textit{downsample} (por meio de convolução ou \textit{pooling}) que a \ac{ResNet}, a implementação da \ac{SSD} por \citeonline{cheng-2017} usa \textit{padding} válido para todas as camadas de \textit{downsample}. Isso faz com que, caso o tamanho de saída da camada de \textit{downsample} não seja inteiro, uma parte seja cortada, podendo causar perda de informação. Sendo assim, foi feita a opção por uma imagem com tamanho menor e o uso de \textit{padding} equivalente, de forma a evitar o corte.
+
+Além dessas modificações, é necessário mudar algumas coisas na arquitetura da rede \ac{DenseNet}121. A primeira delas é que a SSD utiliza ramificações de diferentes níveis para fazer as predições de forma mais precisa.
