@@ -11,7 +11,7 @@
 
 \textit{Machine Learning} ou Aprendizado de Máquina é um campo de estudo cada vez mais recorrente na área de tecnologia. Em uma definição alternativa, pode-se dizer que ``Aprendizado de Máquina é uma área de Inteligência Artificial cujo objetivo é o desenvolvimento de técnicas computacionais sobre o aprendizado bem como a construção de sistemas capazes de adquirir conhecimento de forma automática'' \cite{monard-2003}. Entre as principais aplicações de Aprendizado de máquina, pode se destacar o reconhecimento de padrões, classificação de imagens e a mineração de dados. 
 
-\citeonline{monard-2003} define ainda que o aprendizado de máquina pode ser supervisionado ou não-supervisionado. Quando falamos do primeiro caso, queremos dizer que o algoritmo recebe um conjunto de dados na entrada, processa esses dados e retorna uma saída. Essa saída é comparada com um valor previamente associado à entrada, comumente conhecido como rótulo. Já no aprendizado não-supervisionado, as entradas não possuem rótulo algum, cabendo ao algoritmo fazer a distinção das diversas entradas. Geralmente, nesses casos é necessária uma análise posterior à execução do algoritmo para se entender os resultados obtidos.
+\citeonline{monard-2003} definem ainda que o aprendizado de máquina pode ser supervisionado ou não-supervisionado. Quando falamos do primeiro caso, queremos dizer que o algoritmo recebe um conjunto de dados na entrada, processa esses dados e retorna uma saída. Essa saída é comparada com um valor previamente associado à entrada, comumente conhecido como rótulo. Já no aprendizado não-supervisionado, as entradas não possuem rótulo algum, cabendo ao algoritmo fazer a distinção das diversas entradas. Geralmente, nesses casos é necessária uma análise posterior à execução do algoritmo para se entender os resultados obtidos.
 
 O aprendizado supervisionado se divide em dois grupos menores: classificação e regressão. \citeonline{santos-2012} define que quando o problema possui um conjunto discreto de saídas e o objetivo é atribuir a qual dessas saídas a entrada pertence, se trata de um problema de classificação. \citeonline{santos-2012} define ainda que quando o objetivo é prever uma saída de valor contínuo pra uma entrada, se trata de um problema de regressão.
 
@@ -21,26 +21,27 @@ As seções \ref{subsecao:2:1:1} e \ref{subsecao:2:1:2} irão definir melhor ess
 \subsection{Regressão}
 \label{subsecao:2:1:1}
 
-Como definido anteriormente, o problema de regressão consiste em calcular para cada entrada uma saída que possua um valor contínuo. \citeonline{dosualdo-2003} define que a regressão consiste em fazer uma relação entre os atributos $X={x_1, x_2,..., x_n}$ - onde $X$ é o conjunto de entrada e cada $x_i$ é um atributo numérico ou quantitativo - e $Y$, tal que $Y$ é um atributo ou um conjunto de atributos meta. \citeonline{apte-1997} define essa relação através da equação \ref{eq:eq1}:
+Como definido anteriormente, o problema de regressão consiste em calcular para cada entrada uma saída que possua um valor contínuo. \citeonline{dosualdo-2003} define que a regressão consiste em fazer uma relação entre os atributos $X={x_1, x_2,..., x_n}$ - onde $X$ é o conjunto de entrada e cada $x_i$ é um atributo numérico ou quantitativo - e $Y$, tal que $Y$ é um atributo ou um conjunto de atributos meta. \citeonline{apte-1997} definem essa relação através da Equação  \ref{eq:eq1}.
 
 \begin{equation}
 \label{eq:eq1}
 	Y = f(x_1, x_2,..., x_n)
 \end{equation}
 
-A relação entre o(s) atributo(s) $X$ e o(s) atributo(s)-meta $Y$ alcançada como resultado de um algoritmo de regressão é chamado de modelo. Após a definição do modelo é importante fazer uma avaliação para dizer o quão confiável será a predição gerada pelo modelo. Existem diversas funções usadas na avaliação dos algoritmos de regressão, e uma das mais comuns é o \ac{MLS} que é definido pela equação \ref{eq:eq2}:
+A relação entre o(s) atributo(s) $X$ e o(s) atributo(s)-meta $Y$ alcançada como resultado de um algoritmo de regressão é chamado de modelo. Após a definição do modelo é importante fazer uma avaliação para dizer o quão confiável será a predição gerada pelo modelo. Existem diversas funções usadas na avaliação dos algoritmos de regressão, e uma das mais comuns é o \ac{MLS} que é definido pela Equação  \ref{eq:eq2}.
 
 \begin{equation}
 \label{eq:eq2}
 	E = \sum_{i = 0}^{N}(Y_i - f(X)_i)^2
 \end{equation}
 
-Onde $E$ é o erro, $N$ é o tamanho do conjunto de amostras, $Y_i$ é o valor esperado do atributo-meta e $f(X_i)$ é o resultado do modelo para a entrada $X_i$.
+\noindent
+Em que $E$ é o erro, $N$ é o tamanho do conjunto de amostras, $Y_i$ é o valor esperado do atributo-meta e $f(X_i)$ é o resultado do modelo para a entrada $X_i$.
 
 Alguns exemplos de problemas de regressão são: 
 
 \begin{enumerate}
-	\item Predizer o percentual de gordura que uma pessoa possui no corpo, recebendo como entrada atributos como altura, idade, peso, sexo \cite{dosualdo-2003}.
+	\item Predizer o percentual de gordura que uma pessoa possui no corpo, recebendo como entrada atributos como altura, idade, peso, sexo \cite{dosualdo-2003};
 	\item Predizer o preço de um imóvel baseado em atributos como o tamanho, número de cômodos, número de quartos, etc. \cite{pereira-2012}.
 \end{enumerate}
 
@@ -49,14 +50,14 @@ Uma grande limitação nos métodos de regressão é que eles em sua maioria sol
 \subsection{Classificação}
 \label{subsecao:2:1:2}
 
-Como definido anteriormente, o problema de classificação consiste em um problema de predição quando as saídas são discretas. A ideia dos algoritmos de classificação é definir para cada entrada, um rótulo ou classe no meio de um conjunto finito de rótulos. Um método estatístico muito utilizado nos problemas de classificação é a regressão logística. A regressão logística é bem similar à regressão linear, com a diferença que o resultado é um número entre zero e um, configurando na verdade, a probabilidade de, dado uma entrada $X$ tal que $X = {x_1, x_2, ..., x_n}$ gerar uma saída verdadeira para a hipótese $Y$. Normalmente, os modelos de regressão logística aplica a função sigmóide, descrita pela equação \ref{eq:eq3}:
+Como definido anteriormente, o problema de classificação consiste em um problema de predição quando as saídas são discretas. A ideia dos algoritmos de classificação é definir para cada entrada, um rótulo ou classe no meio de um conjunto finito de rótulos. Um método estatístico muito utilizado nos problemas de classificação é a regressão logística. A regressão logística é bem similar à regressão linear, com a diferença que o resultado é um número entre zero e um, configurando na verdade, a probabilidade de, dado uma entrada $X$ tal que $X = {x_1, x_2, ..., x_n}$ gerar uma saída verdadeira para a hipótese $Y$. Normalmente, os modelos de regressão logística aplica a função sigmóide, descrita pela Equação  \ref{eq:eq3}.
 
 \begin{equation}
 \label{eq:eq3}
 Y = \dfrac{1}{1 + e^{-g(X)}}
 \end{equation}
 
-A regressão logística se ajusta muito bem a problemas de classificação binária. Porém, a grande maioria dos problemas de classificação possuem mais de uma classe, consistindo então em dizer para uma entrada $X$ tal que $X = [x_1, x_2, ..., x_n]$ a qual classe de $Y$ ela pertence, tal que $Y = [y_1, y_2, ..., y_m]$. \citeonline{Thanh-2015} que as principais abordagens para solucionar problemas de classificação com $M$ classes consistem em dividir o problema em vários problemas de classificação binária.
+A regressão logística se ajusta muito bem a problemas de classificação binária. Porém, a grande maioria dos problemas de classificação possuem mais de uma classe, consistindo então em dizer para uma entrada $X$ tal que $X = [x_1, x_2, ..., x_n]$ a qual classe de $Y$ ela pertence, tal que $Y = [y_1, y_2, ..., y_m]$. \citeonline{Thanh-2015} afirmam que as principais abordagens para solucionar problemas de classificação com $M$ classes consistem em dividir o problema em vários problemas de classificação binária.
 
 Essa divisão pode ser feita de duas formas diferentes: 
 \begin{itemize}
@@ -64,7 +65,7 @@ Essa divisão pode ser feita de duas formas diferentes:
 	\item A segunda consiste em combinar as classes em pares e, para cada par de classe gerar um problema de classificação. Isto é, seja $Y$ um conjunto de classes, para cada classe $y \in Y$ criar um problema de classificação para $y$ e  cada $y_\beta$ tal que $y_\beta \in Y - [y]$. Isso gera um conjunto de $\frac{M (M - 1)}{2}$ problemas de classificação. Após gerar e solucionar os problemas, o resultado será a classe que for mais vezes selecionada.
 \end{itemize}
 
-Com base na primeira abordagem, começou a ser utilizada uma função para os problemas de classificação que envolvem múltiplas classes. Essa função é a \textit{softmax} que calcula o valor de cada saída e divide pela soma das saídas, gerando assim uma saída normalizada que corresponde à probabilidade de o dado de entrada estar na classe. Atualmente é a função mais utilizada para problemas de classificação com múltiplas classes e é descrita pela equação \ref{eq:eq4}.
+Com base na primeira abordagem, começou a ser utilizada uma função para os problemas de classificação que envolvem múltiplas classes. Essa função é a \textit{softmax} que calcula o valor de cada saída e divide pela soma das saídas, gerando assim uma saída normalizada que corresponde à probabilidade de o dado de entrada estar na classe. Atualmente é a função mais utilizada para problemas de classificação com múltiplas classes e é descrita pela Equação  \ref{eq:eq4}.
 
 \begin{equation}
 \label{eq:eq4}
@@ -84,22 +85,22 @@ As \ac{RNA} são uma das principais técnicas de aprendizagem de máquina e pode
 
 Além disso, é importante mencionar que em uma rede neural, existem duas camadas em particular que são muito importantes: a primeira camada, que é a camada de entrada de dados, e a última camada que é a camada de saída. Existem dois tipos de \ac{RNA}s: as redes \textit{feed forward}, que processa apenas o estado atual das entradas, e as redes neurais recorrentes que processa o estado atual e o estado anterior. As redes neurais recorrentes podem ser usadas de forma eficiente para processar vídeos, séries temporais e outros dados que possuam múltiplos estados.
 
-A \ac{RNA} \textit{feed forward} mais básica que existe é a perceptron, composta apenas por um conjunto de neurônios de entrada e um único neurônio de saída. A Equação \ref{eq:eq5} representa a fórmula de um perceptron, onde $n$ é o número de entradas, $W_i$ são os respectivos pesos de cada entrada, $X_i$ são as entradas e $B$ é o Bias do neurônio.
+A \ac{RNA} \textit{feed forward} mais básica que existe é a \textit{Perceptron}, composta apenas por um conjunto de neurônios de entrada e um único neurônio de saída. A Equação  \ref{eq:eq5} representa a fórmula de um \textit{Perceptron}, onde $n$ é o número de entradas, $W_i$ são os respectivos pesos de cada entrada, $X_i$ são as entradas e $B$ é o viés do neurônio.
 
 \begin{equation}
 Y=\Big(\sum_{i=1}^{n}{(W_i \times X_i)}\Big) - B
 \label{eq:eq5}
 \end{equation}
 
-Uma rede percepron não é uma arquitetura de redes neurais artificiais muito poderosa, mas deu base para outras arquiteturas mais robustas. A principal delas, é o Perceptron Multi-Camadas.
+Uma rede percepron não é uma arquitetura de redes neurais artificiais muito poderosa, mas deu base para outras arquiteturas mais robustas. A principal delas é o \textit{Perceptron} Multi-Camadas.
 
 \subsection{\textit{Multi-Layer Perceptron}}
 \label{subsecao:2:2:2}
 
 
-As redes Perceptron Multicamadas ou \ac{MLP} são baseadas nos Perceptrons simples, como mencionado anteriormente. A diferença, porém, é que elas trabalham com mais camadas do que simplesmente as camadas de entrada e saída. Geralmente elas possuem uma ou duas camadas intermediárias às camadas externas. Essas camadas intermediárias, também são chamadas de camadas ocultas e servem para conferir uma robustez maior ao método.
+As redes \textit{Perceptron} Multicamadas ou \ac{MLP} são baseadas nos \textit{Perceptron}s simples, como mencionado anteriormente. A diferença, porém, é que elas trabalham com mais camadas do que simplesmente as camadas de entrada e saída. Geralmente elas possuem uma ou duas camadas intermediárias às camadas externas. Essas camadas intermediárias, também são chamadas de camadas ocultas e servem para conferir uma robustez maior ao método.
 
-Nas \ac{MLP}s, uma outra diferença é que as funções de ativação podem variar. As mais comuns são o \ac{ReLU} (definido pela equação \ref{eq:eq6}), a função sigmóide (descrita na seção \ref{subsecao:2:1:2}) e a tangente hiperbólica (definida pela equação \ref{eq:eq7}).
+Nas \ac{MLP}s, uma outra diferença é que as funções de ativação podem variar. As mais comuns são o \ac{ReLU} (definido pela Equação  \ref{eq:eq6}), a função sigmóide (descrita na Seção \ref{subsecao:2:1:2}) e a tangente hiperbólica (definida pela Equação  \ref{eq:eq7}).
 
 \begin{equation}
 	Y(x) = max(0, x)
@@ -111,35 +112,33 @@ Nas \ac{MLP}s, uma outra diferença é que as funções de ativação podem vari
 	\label{eq:eq7}
 \end{equation}
 
-Como foi dito anteriormente, a \ac{MLP} trabalha com aprendizado supervisionado, isso quer dizer que os dados que ela opera são rotulados, e tem uma saída esperada. Quando as entradas são processadas e os resultados das saídas são calculados, eles são comparados com os valores esperados pelos rótulos e é gerado a função de erro quadrático, definida na seção \ref{subsecao:2:1:1}.
+Como foi dito anteriormente, a \ac{MLP} trabalha com aprendizado supervisionado, isso quer dizer que os dados que ela opera são rotulados, e tem uma saída esperada. Quando as entradas são processadas e os resultados das saídas são calculados, eles são comparados com os valores esperados pelos rótulos e é gerado a função de erro quadrático, definida na Seção \ref{subsecao:2:1:1}.
 
 Sabendo-se disso, o objetivo para melhorar a precisão da \ac{MLP} é minimizar o valor da função erro, ou seja, tornar as saídas da rede o mais próximo possível das saídas esperadas. Para tanto, é utilizado o método de retropropagação de erro que reajusta os pesos da rede de acordo com os valores obtidos usando a descida de gradiente.
 
-\citeonline{arnold-2011} define que aumentar o número de camadas em um \ac{MLP} não garante uma melhoria dos resultados, pois a descida de gradiente pode chegar a um mínimo local. Além disso, o aumento do número de camadas implica em um tempo muito maior de processamento. Para lidar com esse problema surge o \emph{Deep Learning}, uma arquitetura avançada com múltiplas camadas, que soluciona a dificuldade que as redes neurais possuem ao lidar com dados de alta dimensionalidade \cite{arnold-2011}.
+\citeonline{arnold-2011} definem que aumentar o número de camadas em um \ac{MLP} não garante uma melhoria dos resultados, pois a descida de gradiente pode chegar a um mínimo local. Além disso, o aumento do número de camadas implica em um tempo muito maior de processamento. Para lidar com esse problema surge o \emph{Deep Learning}, uma arquitetura avançada com múltiplas camadas, que soluciona a dificuldade que as redes neurais possuem ao lidar com dados de alta dimensionalidade \cite{arnold-2011}.
 
 \section{\textit{Deep Learning}}
 \label{secao:2:3}
 
-
-A principio não parecia ser viável manipular arquiteturas profundas de redes neurais. Porém, de acordo com \citeonline{deng-2014} surgiu um algoritmo de aprendizado não-supervisionado que conseguiu aliviar empiricamente as dificuldades de otimização em arquiteturas profundas. Esse algoritmo é a \ac{DBN}, um modelo generativo profundo composto de uma camada visível e várias camadas ocultas compostas por uma pilha de \ac{RBM}s.
+A principio não parecia ser viável manipular arquiteturas profundas de redes neurais. Porém, de acordo com \citeonline{deng-2014}, surgiu um algoritmo de aprendizado não-supervisionado que conseguiu aliviar empiricamente as dificuldades de otimização em arquiteturas profundas. Esse algoritmo é a \ac{DBN}, um modelo generativo profundo composto de uma camada visível e várias camadas ocultas compostas por uma pilha de \ac{RBM}s.
 
 \citeonline{deng-2014} definem ainda que o aprendizado nas \ac{DBN}s é feito por um algoritmo guloso que ajustas os pesos camada-por-camada com uma complexidade linear ao tamanho e à profundidade da rede. E uma relação inesperada entre as \ac{DBN}s e as \ac{MLP}s surgiu quando descobriu-se que ao utilizar os pesos de uma \ac{DBN} com arquitetura correspondente, você consegue inicializar os pesos de uma \ac{MLP} de forma a produzir melhores resultados do que utilizando pesos aleatórios.
 
-Uma segunda alternativa para trabalhar com aumento de camadas é o empilhamento de auto-codificadores. O empilhamento de auto-codificadores consiste basicamente em inserir na saída de uma rede neural uma segunda rede neural que pra cada entrada produz uma saída específica e retreinar a nova rede neural utilizando o algoritmo de retropropagação de erro \cite{deng-2014}.
+Uma segunda alternativa para trabalhar com aumento de camadas é o empilhamento de auto-codificadores. O empilhamento de auto-codificadores consiste basicamente em inserir na saída de uma rede neural uma segunda rede neural que para cada entrada produz uma saída específica e retreinar a nova rede neural utilizando o algoritmo de retropropagação de erro \cite{deng-2014}.
 
 \subsection{Redes Neurais Convolucionais}
 \label{subsecao:2:3:1}
 
-
 As \ac{CNN} são um modelo específico de \textit{Deep Learning} muito utilizados em aplicações de visão computacional e aplicações de reconhecimento de imagens. De acordo com \citeonline{ferreira-2017}, as \ac{CNN}s utilizam matrizes para processar as entradas de dados, sendo essas matrizes unidimensionais para sinais e sequências, bidimensionais para imagens e tridimensionais para imagens volumétricas e vídeos. 
 
-Ao contrário das \ac{RNA}s tradicionais (como \ac{MLP}), as \ac{CNN}s não necessariamente ligam todos os neurônios na camada de origem a todos os neurônios da camada de destino. \citeonline{ferreira-2017} define que existem três tipos comuns de camadas utilizadas nas redes neurais convolucionais: as camadas de convolução, camadas de pooling e camadas completamente conexas.
+Ao contrário das \ac{RNA}s tradicionais (como \ac{MLP}), as \ac{CNN}s não necessariamente ligam todos os neurônios na camada de origem a todos os neurônios da camada de destino. \citeonline{ferreira-2017} define que existem três tipos comuns de camadas utilizadas nas redes neurais convolucionais: as camadas de convolução, camadas de \textit{pooling} e camadas completamente conexas.
 
-A ideia da camada de convolução, é de que cada neurônio recebe como entrada neurônios próximos e tem por objetivo criar mapas e filtros. \citeonline{ferreira-2017} define que em aplicações de reconhecimento de objetos, por exemplo, é comum as primeiras camadas de convolução detectarem bordas ou manchas que seriam as características mais básicas da imagem. As camadas de convolução mais profundas, detectam outras características mais específicas.
+A ideia da camada de convolução é de que cada neurônio recebe como entrada neurônios próximos e tem por objetivo criar mapas e filtros. \citeonline{ferreira-2017} define que em aplicações de reconhecimento de objetos, por exemplo, é comum as primeiras camadas de convolução detectarem bordas ou manchas que seriam as características mais básicas da imagem. As camadas de convolução mais profundas detectam outras características mais específicas.
 
-As camadas de pooling são utilizadas para reduzir a dimensão de dados vindo das camadas de convolução, consequentemente reduzindo o custo computacional \cite{ferreira-2017}. NA prática elas funcionam como as camadas de convolução, mas ao invés de fazer a operação tradicional de convolução, elas reduzem um conjunto de elementos a um único representante com base em uma propriedade específica. As propriedades mais utilizadas são a de máximo e de média \cite{ferreira-2017}.
+As camadas de \textit{pooling} são utilizadas para reduzir a dimensão de dados vindo das camadas de convolução, consequentemente reduzindo o custo computacional \cite{ferreira-2017}. Na prática elas funcionam como as camadas de convolução, mas ao invés de fazer a operação tradicional de convolução, elas reduzem um conjunto de elementos a um único representante com base em uma função específica. As funções mais utilizadas são máximo e média \cite{ferreira-2017}.
 
-Por fim, as camadas completamente conexas são exatamente iguais às redes MLP e é comum utilizá-las no final da rede para conectar à saída. Seu acréscimo no final é importante pois faz a ligação de todos os filtros \cite{ferreira-2017}. As arquiteturas de \ac{CNN}s geralmente intercalam algumas camadas de convolução com uma camada de pooling. As arquiteturas mais antigas costumavam adicionar camadas completamente conexas ao final, porém, os modelos mais novos, como a \ac{ResNet} e a \ac{DenseNet} já não usam mais esse conceito.
+Por fim, as camadas completamente conexas são exatamente iguais às redes MLP e é comum utilizá-las no final da rede para conectar à saída. Seu acréscimo no final é importante pois faz a ligação de todos os filtros \cite{ferreira-2017}. As arquiteturas de \ac{CNN}s geralmente intercalam algumas camadas de convolução com uma camada de \textit{pooling}. As arquiteturas mais antigas costumavam adicionar camadas completamente conexas ao final, porém, os modelos mais novos, como a \ac{ResNet} e a \ac{DenseNet} já não usam mais esse conceito.
 
 
 %%%%%%%%%%%%%%%%%%% Formato para a inserção de figuras

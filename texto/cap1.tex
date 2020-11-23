@@ -31,7 +31,7 @@ O uso das \ac{CNN} tem se tornado cada vez mais populares, principalmente em alg
 %%% p1 Escrever sobre os resultados obtidos pelas CNNs em classificação de imagens
 Contudo, as \ac{CNN} só passaram a ser utilizadas com mais frequência algum tempo depois. \citeonline{deng-2009} lançaram o ImageNet, uma base de dados de larga escala com mais de 14 milhões de imagens anotadas manualmente divididas em mais de 22 mil classes diferentes. Essa base de imagens pode ser usada para as tarefas de classificação, detecção e localização de objetos. Além disso, \citeonline{deng-2009} também lançaram o \ac{ILSVRC}, uma competição global anual, aonde os competidores são avaliados nas tarefas de classificação de imagens, detecção de objetos e localização de objetos. \citeonline{krizhevsky-2012} alcançaram o melhor resultado no \ac{ILSVRC} de 2012 usando a AlexNet - uma \ac{CNN} - e desde então, as \ac{CNN}s obtém sempre os melhores resultados nos desafios.
 
-Em \citeyear{he-2016}, \citeauthor{he-2016} propôs a \ac{ResNet} que introduziam o conceito de \textit{skip connection}. Uma \textit{skip connection} é quando a camada $C_n$ além de se conectar com a camada $C_{n+1}$ ela se conecta com outra mais a frente - no caso da \textit{\ac{ResNet}}, a camada $C_{n+2}$. Sendo assim, na entrada $C_{n+2}$ recebe em suas entradas uma junção das saídas de $C_{n}$ e $C_{n+1}$. Essa combinação de entradas na \ac{ResNet} foi feita como uma soma de matrizes. A figura \ref{fig:blocoresidual} mostra um exemplo de \textit{skip connection} na \textit{\ac{ResNet}}.
+Em \citeyear{he-2016}, \citeauthor{he-2016} propuseram a \ac{ResNet} que introduziam o conceito de \textit{skip connection}. Uma \textit{skip connection} é quando a camada $C_n$ além de se conectar com a camada $C_{n+1}$ ela se conecta com outra mais a frente - no caso da \textit{\ac{ResNet}}, a camada $C_{n+3}$. Sendo assim, a camada $C_{n+3}$ recebe em suas entradas uma junção das saídas de $C_{n}$ e $C_{n+2}$. Essa combinação de entradas na \ac{ResNet} foi feita como uma soma de matrizes. A Figura \ref{fig:blocoresidual} mostra um exemplo de \textit{skip connection} na \textit{\ac{ResNet}}.
 
 \begin{figure}[H]
 	% Alterar espaçamentos antes e depois do caption
@@ -65,7 +65,7 @@ Seguindo a mesma ideia de \textit{skip connection} proposta por \citeonline{he-2
 	\label{fig:blocodenso}
 \end{figure}
 
-A figura \ref{fig:blocodenso} mostra como se conectam as camadas na \ac{DenseNet}. Supondo que temos um bloco denso $B$ com um conjunto de 5 camadas $C = \{c_1, c_2, c_3, c_4, c_5\}$. Como explicado no parágrafo anterior, a saída das camadas serão utilizadas em todas as camadas subsequentes no mesmo bloco. Sendo assim, a entrada de $c_3$ será composta pelas saídas de $c_1$ e $c_2$ concatenadas, e assim sucessivamente. Além disso, como as saídas são concatenadas e não somadas, a tendência é que as entradas cresçam a medida que a rede se aprofunda. O conceito de bloco denso permite propagar múltiplos níveis de abstração ao longo de toda a rede, melhorando assim os resultados obtidos \cite{liu-2017}.
+A Figura \ref{fig:blocodenso} mostra como se conectam as camadas na \ac{DenseNet}. Supondo que temos um bloco denso $B$ com um conjunto de 5 camadas $C = \{c_1, c_2, c_3, c_4, c_5\}$. Como explicado no parágrafo anterior, a saída das camadas serão utilizadas em todas as camadas subsequentes no mesmo bloco. Sendo assim, a entrada de $c_3$ será composta pelas saídas de $c_1$ e $c_2$ concatenadas, e assim sucessivamente. Além disso, como as saídas são concatenadas e não somadas, a tendência é que as entradas cresçam a medida que a rede se aprofunda. O conceito de bloco denso permite propagar múltiplos níveis de abstração ao longo de toda a rede, melhorando assim os resultados obtidos \cite{liu-2017}.
 
 \citeauthor{liu-2017} ficaram em segundo lugar no \ac{ILSVRC} de 2017 e venceram o prêmio de melhor artigo da \ac{CVPR} do mesmo ano.
 
@@ -95,7 +95,7 @@ Por fim o uso das camadas de deconvolução no método proposto traz boas expect
 \section{Objetivos}
 \label{secao:1:2}  
 
-O objetivo do trabalho é utilizar uma arquitetura de \ac{CNN} modificada com camadas de deconvolução para fazer detecção e classificação de objetos. Para isso, será necessário:
+O objetivo do trabalho é utilizar a rede \ac{DenseNet}121 modificada com camadas adicionais de convolução e deconvolução para fazer detecção e classificação de objetos. Para isso, será necessário:
 
 \begin{itemize}
 	\item Adaptar a \ac{CNN} \ac{DenseNet} \cite{liu-2017} para fazer localização e classificação de forma similar à \ac{SSD};
@@ -117,4 +117,4 @@ Tendo isso em vista, a proposta de utilizar a \ac{DenseNet} \cite{liu-2017} pré
 \section{Organização do texto}
 \label{secao:1:4}
 
-O Capítulo \ref{cap:2} traz os principais conceitos relacionados à \textit{Deep Learning}, redes neurais artificiais, classificação de objetos em imagens e detecção de objetos em imagens, necessários à compreensão do trabalho. O Capítulo \ref{cap:3} contém um resumo dos trabalhos relacionados à monografia. O Capítulo \ref{cap:4} contém a metodologia a ser seguida para o desenvolvimento do trabalho. Além disso contém um cronograma a ser seguido e a definição das métricas a ser utilizadas para avaliar os resultados obtidos. O Capítulo \ref{cap:5} descreve os experimentos realizados e os resultados obtidos.
+O Capítulo \ref{cap:2} traz os principais conceitos relacionados à \textit{Deep Learning}, redes neurais artificiais, classificação de objetos em imagens e detecção de objetos em imagens, necessários à compreensão do trabalho. O Capítulo \ref{cap:3} contém um resumo dos trabalhos relacionados à monografia. O Capítulo \ref{cap:4} contém a metodologia a ser seguida para o desenvolvimento do trabalho. Além disso contém um cronograma a ser seguido e a definição das métricas a ser utilizadas para avaliar os resultados obtidos. O Capítulo \ref{cap:5} descreve os experimentos realizados e os resultados obtidos. O Capítulo \ref{cap:6} apresenta a conclusão do trabalho com base nos resultados obtidos e apresenta propostas de trabalhos futuros.

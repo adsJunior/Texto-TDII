@@ -21,8 +21,8 @@ A rede foi inicializada com os pesos da \ac{DenseNet}121 treinada na ImageNet, e
 
 \begin{itemize}
 	\item $\alpha = 5\times10^{-5}$;
-	\item $\beta_1 = 0.9$;
-	\item $\beta_2 = 0.999$;
+	\item $\beta_1 = 0,9$;
+	\item $\beta_2 = 0,999$;
 	\item $\epsilon = 1\times10^{-8}$.
 \end{itemize}
 
@@ -47,7 +47,7 @@ Depois do treinamento, foram feitos alguns experimentos com imagens aleatórias 
 	\label{fig:teste_1}
 \end{figure}
 
-Na figura \ref{fig:teste_1} o modelo detectou a pessoa sentada na cadeira e a cadeira no fundo, porém não detectou o cão deitado no chão. Isso pode refletir um pouco de dificuldade em perceber objetos menores ou que não estejam tão centralizados. Além disso, Embora a pessoa sentada esteja bem nítida na imagem, o modelo não conseguiu ter 100\% de confiança que era uma pessoa.
+Na Figura \ref{fig:teste_1} o modelo detectou a pessoa sentada na cadeira e a cadeira no fundo, porém não detectou o cão deitado no chão. Isso pode refletir um pouco de dificuldade em perceber objetos menores ou que não estejam tão centralizados. Além disso, Embora a pessoa sentada esteja bem nítida na imagem, o modelo não conseguiu ter 100\% de confiança que era uma pessoa.
 
 \begin{figure}[H]
 	% Alterar espaçamentos antes e depois do caption
@@ -63,7 +63,7 @@ Na figura \ref{fig:teste_1} o modelo detectou a pessoa sentada na cadeira e a ca
 	\label{fig:teste_2}
 \end{figure}
 
-Na figura \ref{fig:teste_2} percebemos mais uma vez o problema da confiança baixa. Além disso, a \textit{bounding box} do cão de trás esta pegando apenas a cabeça, sendo que outras partes do corpo dele estão expostas (ainda que sobrepostas parcialmente).
+Na Figura \ref{fig:teste_2} percebemos mais uma vez o problema da confiança baixa. Além disso, a \textit{bounding box} do cão de trás esta pegando apenas a cabeça, sendo que outras partes do corpo dele estão expostas (ainda que sobrepostas parcialmente).
 
 
 \begin{figure}[H]
@@ -80,7 +80,7 @@ Na figura \ref{fig:teste_2} percebemos mais uma vez o problema da confiança bai
 	\label{fig:teste_3}
 \end{figure}
 
-Na figura \ref{fig:teste_3}, mostra mais uma vez uma nítida dificuldade do modelo em perceber objetos mais distantes. A imagem possui 9 objetos delimitados no \textit{ground-truth} e o modelo conseguiu detectar apenas 2. Ele não consegue perceber nem a mesa de jantar e nem as pessoas mais ao fundo. Além disso, as duas pessoas que estão em pé no canto direito da figura foram percebidas como apenas uma pelo modelo.
+Na Figura \ref{fig:teste_3}, mostra mais uma vez uma nítida dificuldade do modelo em perceber objetos mais distantes. A imagem possui 9 objetos delimitados no \textit{ground-truth} e o modelo conseguiu detectar apenas 2. Ele não consegue perceber nem a mesa de jantar e nem as pessoas mais ao fundo. Além disso, as duas pessoas que estão em pé no canto direito da Figura foram percebidas como apenas uma pelo modelo.
 
 
 \begin{figure}[H]
@@ -97,7 +97,7 @@ Na figura \ref{fig:teste_3}, mostra mais uma vez uma nítida dificuldade do mode
 	\label{fig:teste_4}
 \end{figure}
 
-A figura \ref{fig:teste_4} é bem simples e o único objeto presente está bem nítido, então o modelo consegue percebê-lo com a confiança de 100\%.
+A Figura \ref{fig:teste_4} é bem simples e o único objeto presente está bem nítido, então o modelo consegue percebê-lo com a confiança de 100\%.
 
 \begin{figure}[H]
 	% Alterar espaçamentos antes e depois do caption
@@ -113,12 +113,12 @@ A figura \ref{fig:teste_4} é bem simples e o único objeto presente está bem n
 	\label{fig:teste_5}
 \end{figure}
 
-Já a figura \ref{fig:teste_5} mostra um fenômeno diferente: além de detectar o único objeto presente no \textit{ground-truth} com a confiança alta, ele também detecta uma outra instancia do mesmo objeto ao fundo. Isso significa que embora o modelo tenha um pouco de dificuldade com objetos que não estão em destaque, essa dificuldade não é tão crítica e existe uma certa robustês.
+Já a Figura \ref{fig:teste_5} mostra um fenômeno diferente: além de detectar o único objeto presente no \textit{ground-truth} com a confiança alta, ele também detecta uma outra instância do mesmo objeto ao fundo. Isso significa que embora o modelo tenha um pouco de dificuldade com objetos que não estão em destaque, essa dificuldade não é tão crítica e existe uma certa robustês.
 
 \subsection{Avaliação Quantitativa}
 \label{secao:5:1:3}
 
-Depois dos experimentos, foram feitos os testes para avaliar de forma numérica os resultados do modelo e comparar com o estado da arte. O resultado final apontou um \ac{mAP} de 72.6\%. 
+Depois dos experimentos, foram feitos os testes para avaliar de forma numérica os resultados do modelo e comparar com o estado da arte. O resultado final apontou um \ac{mAP} de 72,6\%. 
 
   \begin{table}[H]
     \centering
@@ -131,29 +131,29 @@ Depois dos experimentos, foram feitos os testes para avaliar de forma numérica 
     \label{tab:classesNas}
 % Conteúdo da tabela
     \begin{tabular}{c|c}
-	Objeto &	\ac{mAP} \\ 
+	Objeto &	\ac{mAP} & SSD300 & SSD321 \\ 
 	\hline 
- 	aeroplane & 0.808 \\ 
-	bicycle & 0.823 \\ 
-	bird & 0.663 \\
-	boat & 0.613 \\ 
-	bottle & 0.312 \\ 
-	bus & 0.828 \\
-	car & 0.86 \\ 
-	cat & 0.858 \\
-	chair & 0.529 \\ 
-	cow & 0.75 \\
-	diningtable & 0.724 \\ 
-	dog & 0.774 \\
-	horse & 0.862 \\ 
-	motorbike & 0.863 \\
-	person & 0.774 \\ 
-	pottedplant & 0.426 \\
-	sheep & 0.699 \\
-	sofa & 0.772 \\
-	train & 0.843 \\
-	tvmonitor & 0.73 \\
-	total \ac{mAP} & 0.726 \\
+ 	aeroplane & 0,808 & 0,795  & 0,763 \\ 
+	bicycle & 0,823 & 0,839  & 0,846  \\ 
+	bird & 0,663 & 0,76  & 0,793  \\
+	boat & 0,613 & 0,696  & 0,646  \\ 
+	bottle & 0,312 & 0,575  & 0,472  \\ 
+	bus & 0,828 & 0,87  & 0,854  \\
+	car & 0,86 & 0,857  & 0,84  \\ 
+	cat & 0,858 & 0,881  & 0,888  \\
+	chair & 0,529 & 0,603  & 0,601  \\ 
+	cow & 0,75 & 0,815  & 0,826  \\
+	diningtable & 0,724 & 0,77  & 0,769  \\ 
+	dog & 0,774 & 0,861  & 0,867  \\
+	horse & 0,862 & 0,875  & 0,872  \\ 
+	motorbike & 0,863 & 0,84  & 0,854  \\
+	person & 0,774 & 0,794  & 0,791  \\ 
+	pottedplant & 0,426 & 0,523  & 0,508  \\
+	sheep & 0,699 & 0,779  & 0,772  \\
+	sofa & 0,772 & 0,795  & 0,826  \\
+	train & 0,843 & 0,876  & 0,873  \\
+	tvmonitor & 0,73 & 0,768  & 0,766  \\ \\
+	total & 0,726 & 0,775  & 0,771  \\
     \end{tabular}
 % Fonte
     \captionfont{\small{\textbf{\\Fonte: Elaborado pelo autor.}}}
