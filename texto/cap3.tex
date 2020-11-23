@@ -4,6 +4,7 @@
 \vspace{-1.9cm}
 
 \section{\textit{\ac{DenseNet}}}
+\label{secao:3:1}
 
 Como mencionado anteriormente, desde 2012 as tarefas de classificação de imagens são resolvidas majoritariamente por arquiteturas de \textit{Deep Learning}. \citeonline{he-2016} propôs uma nova arquitetura que utilizava o conceito de \textit{skip connection}, que, como explicado anteriormente, consiste em utilizar a saída de uma camada em camadas posteriores além da próxima. O conceito de \textit{skip connection} fez tanto sucesso que tornou a ser utilizado em um modelo mais recente. \cite{liu-2017} propuseram um modelo de \ac{CNN} que utiliza esse mesmo conceito, porém de uma forma um pouco diferente. 
 
@@ -36,8 +37,9 @@ As \ac{DenseNet}s seguem um padrão arquitetural muito similar ao das \ac{ResNet
 O modelo proposto obteve resultados competitivos com os da literatura, ficando em segundo lugar no \ac{ILSVRC} de 2017 e apresentando resultados competitivos com os da literatura na época. O artigo também foi premiado como a melhor publicação da \ac{CVPR} do ano de 2017. O modelo obteve uma acurácia de 96\% na cifar-10 e 82\% na cifar-100.
 
 \section{SSD: \textit{Single-Shot Multibox Detector}}
+\label{secao:3:2}
 
-\citeonline{wei-2015} propuseram um método a base de redes neurais convolucionais para fazer a localização e detecção de objetos. A proposta deles melhorou significativamente os resultados apresentados no estado da arte. Isso se deve ao fato de que eles não só conseguiram propor um modelo que faz a localização e classificação de forma eficiente (chegando a 74,3\% de acurácia), como conseguiram obter esse resultado fazendo classificação e localização em tempo real, com uma velocidade de 59 \ac{FPS}. Uma outra vantagem obtida por esse método é que ele consegue fazer a localização e classificação em imagens significativamente menores, uma vez que os quadros processados pelo \ac{YOLO} têm dimensões $448 \times 448$ e os processados pelo \ac{R-CNN} têm $1000\times 600$, o \ac{SSD} processa quadros de dimensões $300 \times 300$. Isso é uma vantagem, pois mesmo o algoritmo trabalhando com imagens menores, o resultado consegue competir com os outros métodos.
+\citeonline{wei-2015} propuseram um método a base de redes neurais convolucionais para fazer a localização e detecção de objetos. A proposta deles melhorou significativamente os resultados apresentados no estado da arte. Isso se deve ao fato de que eles não só conseguiram propor um modelo que faz a localização e classificação de forma eficiente (chegando a 74,3\% de \ac{mAP}), como conseguiram obter esse resultado fazendo classificação e localização em tempo real, com uma velocidade de 59 \ac{FPS}. Uma outra vantagem obtida por esse método é que ele consegue fazer a localização e classificação em imagens significativamente menores, uma vez que os quadros processados pelo \ac{YOLO} têm dimensões $448 \times 448$ e os processados pelo \ac{R-CNN} têm $1000\times 600$, o \ac{SSD} processa quadros de dimensões $300 \times 300$. Isso é uma vantagem, pois mesmo o algoritmo trabalhando com imagens menores, o resultado consegue competir com os outros métodos.
 
 A abordagem consiste em utilizar a rede VGG16 \cite{simonyan-2014} como arquitetura base, substituir as camadas completamente conectadas fc6 e fc7 por camadas convolucionais, alterar o filtro pool5 de $2 \times 2 - s2$ para $3 \times 3 - s1$, e usaram o algoritmo \textit{à trous}\cite{holschneider-1990} para preencher os espaços vazios. Além disso, eles removeram todas as camadas de \textit{dropout} e a última camada completamente conectada. Por fim, as camadas de convolução geram os resultados de mais de 8000 localizações e classificações, as quais são filtradas em um passo final de supressão de não-máximos, que elimina todos os resultados com confiança abaixo de $0,5$.
 
@@ -58,8 +60,9 @@ A abordagem consiste em utilizar a rede VGG16 \cite{simonyan-2014} como arquitet
 A Figura \ref{fig:yoloxssd} mostra as diferenças entre as arquiteturas \ac{YOLO} e \ac{SSD}. Enquanto \citeonline{redmon-2015} usaram uma camada completamente conectada intermediária para fazer a localização dos objetos, \citeonline{wei-2015} usaram camadas de convolução sobre mapas de múltiplos tamanhos. Além disso, o \ac{SSD} trabalha com \textit{bounding-boxes} de tamanhos padrões $\{1, 2, 3, \frac{1}{2}, \frac{1}{3}\}$. Os filtros de convolução adicionais, os tamanhos padrões de \textit{bounding-boxes} e o uso de \textit{data-augmentation} foram cruciais na obtenção dos bons resultados.
 
 \section{DSSD: \textit{Deconvolution Single-Shot Detector}}
+\label{secao:3:3}
 
-\citeonline{cheng-2017} propuseram uma extensão do \ac{SSD}. Depois dos resultados obtidos pelo \ac{SSD} ao fazer localizção e classificação de objetos com uma acurácia de $79,5\%$, eles propuseram uma abordagem alternativa, usando camadas de deconvolução ao final da rede. As camadas de deconvolução tem entre seus resultados o aumento de resolução do mapa de entrada. A abordagem visou explorar esse efeito com o intuito de aumentar a acurácia da classificação e localização de objetos, e, com isso, atingir uma acurácia de $81,5\%$. Embora essa abordagem tenha uma acurácia maior do que a obtida por \citeonline{wei-2015}, ela não é rápida o bastante pra fazer localização e classificação em tempo real.
+\citeonline{cheng-2017} propuseram uma extensão do \ac{SSD}. Depois dos resultados obtidos pelo \ac{SSD} ao fazer localizção e classificação de objetos com uma \ac{mAP} de $79,5\%$, eles propuseram uma abordagem alternativa, usando camadas de deconvolução ao final da rede. As camadas de deconvolução tem entre seus resultados o aumento de resolução do mapa de entrada. A abordagem visou explorar esse efeito com o intuito de aumentar a \ac{mAP} da classificação e localização de objetos, e, com isso, atingir uma \ac{mAP} de $81,5\%$. Embora essa abordagem tenha uma \ac{mAP} maior do que a obtida por \citeonline{wei-2015}, ela não é rápida o bastante pra fazer localização e classificação em tempo real.
 
 
 \begin{figure}[H]
@@ -77,20 +80,38 @@ A Figura \ref{fig:yoloxssd} mostra as diferenças entre as arquiteturas \ac{YOLO
 \end{figure}
 
 %Rever essa parte
-Nesse trabalho, foram propostas duas alterações principais no modelo \ac{SSD}. A primeira delas foi a utilização da rede neural ResNet-101 \citeonline{he-2016} e a segunda foi a utilização das camadas adicionais de deconvolução. Como mostra a Figura \ref{fig:ssdxdssd}, a arquitetura agora também utiliza de módulos de predição individuais, onde a saída da última camada de convolução e a saída de cada camada de deconvolução gera seus próprios resultados para a classificação e localização. A Figura \ref{fig:dssdpred} mostra as variações dos módulos de predição da \ac{DSSD}.
+Nesse trabalho, foram propostas duas alterações principais no modelo \ac{SSD}. A primeira delas foi a utilização da rede neural ResNet-101 \citeonline{he-2016}. \citeonline{cheng-2017} percebeu, porém que apenas substituir a VGG16 pela \ac{ResNet} não produziria resultados melhores. Sendo assim, após adicionar as camadas de convolução do \ac{SSD} para fazer a detecção em múltiplos níveis, ele adicionou um módulo com mais algumas camadas de convolução a fim de melhorar os resultados. Os módulos propostos estão na figura \ref{fig:ssdpred}.
 
 \begin{figure}[H]
 	% Alterar espaçamentos antes e depois do caption
 	\setlength{\abovecaptionskip}{0pt}
 	\setlength{\belowcaptionskip}{0pt}
 	% Caption
-	\caption[Módulos de predição DSSD]{Módulos de predição \ac{DSSD}}
+	\caption[Módulos de predição SSD com \ac{ResNet}]{Módulos de predição \ac{SSD} com \ac{ResNet}}
 	\centering
 	\includegraphics[width=.8\textwidth]{imagem/0x_dssdpredmod.jpg}
 	% Caption centralizada
 	\captionsetup{justification=centering}
 	\captionfont{\small{\textbf{\\Fonte: \citeonline{cheng-2017}.}}}	
-	\label{fig:dssdpred}
+	\label{fig:ssdpred}
 \end{figure}
 
-Como mencionado anteriormente, embora o \ac{DSSD} tenha melhorado a acurácia do \ac{SSD}, ele não é aplicável para fazer a localização e classificação em tempo real. Com uma acurácia de $81,5\%$ ele consegue processar apenas $6,6$ \ac{FPS}. Isso se deve ao uso das deconvoluções, da ResNet 101 - que possui mais camadas, e, portanto toma mais tempo de processamento - e também ao aumento no número de \textit{bounding boxes} geradas($43688$ vs. $17080$), fazendo assim com que a supressão de não-máximos leve mais tempo.
+Fazendo os testes, \citeonline{cheng-2017} perceberam que os melhores resultados foram obtidos usando a terceira opção que consistem um módulo residual com uma convolução na conexão alternativa e a junção das duas entradas sendo feita por meio de uma multiplicação elemento por elemento. Neste ponto, as mudanças ainda se mostravam pouco efetivas, já que a nova \ac{SSD}321 apresentava 77.1\% de \ac{mAP} contra 77.5\% de \ac{mAP} da \ac{SSD}300, ao passo que a nova \ac{SSD}513 apresentava 80.6\% contra 79.5\% da \ac{SSD}512.
+
+Tendo isso em vista, após a implementação dos módulos \ac{SSD} na \ac{ResNet}101, \citeonline{cheng-2017} decidiram adicionar módulos usando camadas de deconvolução com o intuito de fazer um \textit{upsample} nas saídas da \ac{SSD} para obter mais dados. Depois de adicionar esses módulos, eles são combinados com o módulo \ac{SSD} anterior para gerar a nova saída. A figura \ref{fig:deconv} mostra como é feita essa combinação.
+
+\begin{figure}[H]
+	% Alterar espaçamentos antes e depois do caption
+	\setlength{\abovecaptionskip}{0pt}
+	\setlength{\belowcaptionskip}{0pt}
+	% Caption
+	\caption[Módulos de deconvolução]{Módulos de de deconvolução}
+	\centering
+	\includegraphics[width=.6\textwidth]{imagem/0x_dssd-deconv.jpg}
+	% Caption centralizada
+	\captionsetup{justification=centering}
+	\captionfont{\small{\textbf{\\Fonte: \citeonline{cheng-2017}.}}}	
+	\label{fig:deconv}
+\end{figure}
+
+Como mencionado anteriormente, embora o \ac{DSSD} tenha melhorado a \ac{mAP} do \ac{SSD}, ele não é aplicável para fazer a localização e classificação em tempo real. Com uma \ac{mAP} de $81,5\%$ ele consegue processar apenas $6,6$ \ac{FPS}. Isso se deve ao uso das deconvoluções, da ResNet 101 - que possui mais camadas, e, portanto toma mais tempo de processamento - e também ao aumento no número de \textit{bounding boxes} geradas($43688$ vs. $17080$), fazendo assim com que a supressão de não-máximos leve mais tempo.
