@@ -105,7 +105,7 @@ Tendo isso em vista, após a implementação dos módulos \ac{SSD} na \ac{ResNet
 	\setlength{\abovecaptionskip}{0pt}
 	\setlength{\belowcaptionskip}{0pt}
 	% Caption
-	\caption[Módulos de deconvolução]{Módulos de de deconvolução}
+	\caption[Módulos de deconvolução]{Módulos de deconvolução}
 	\centering
 	\includegraphics[width=.6\textwidth]{imagem/0x_dssd-deconv.jpg}
 	% Caption centralizada
@@ -115,3 +115,71 @@ Tendo isso em vista, após a implementação dos módulos \ac{SSD} na \ac{ResNet
 \end{figure}
 
 Como mencionado anteriormente, embora o \ac{DSSD} tenha melhorado a \ac{mAP} do \ac{SSD}, ele não é aplicável para fazer a localização e classificação em tempo real. Com uma \ac{mAP} de $81,5\%$ ele consegue processar apenas $6,6$ \ac{FPS}. Isso se deve ao uso das deconvoluções, da ResNet 101 - que possui mais camadas, e, portanto toma mais tempo de processamento - e também ao aumento no número de \textit{bounding boxes} geradas($43688$ vs. $17080$), fazendo assim com que a supressão de não-máximos leve mais tempo.
+
+\section{PASCAL VOC}
+\label{secao:3:4}
+
+Um grande desafio em treinar modelos de \textit{Deep Learning} é a necessidade de um grande volume de dados classificados manualmente. Com essa necessidade, diversos trabalhos foram desenvolvidos com o objetivo de apresentar uma base de dados anotados manualmente para um conjunto de problemas específicos. Nos trabalhos de Localização e classificação, uma das bases mais utilizadas é a \ac{PASCAL VOC}.
+
+O desafio \ac{PASCAL VOC} foi realizado anualmente entre os anos de 2004 e 2012, e a cada ano novas imagens e novos desafios foram propostos na área de visão computacional. Os principais desafios envolviam Localização e Classificação de Objetos, Segmentação Semântica, \textit{layout} humano (um desafio que consiste em detectar partes do corpo como cabeça, mãos e pés) e classificação de ações \cite{everingham-2015}.
+
+O desafio de Localização e Classificação de objetos desde 2007 possui 20 classes distintas de objetos e a cada ano eles criaram uma nova base com mais imagens extraídas da internet. A Tabela \ref{tab:voc2007} mostra as classes, o número de imagens e o número de objetos por classe nos conjuntos de treino, validação e teste.
+
+\begin{table}[H]
+	\centering
+	\footnotesize
+	% Alterar espaçamentos antes e depois do caption
+	\setlength{\abovecaptionskip}{0pt}
+	\setlength{\belowcaptionskip}{0pt}
+	% Caption
+	\caption[Pascal VOC 2007]{Classes de imagens do PASCAL VOC 2007}
+	\label{tab:voc2007}
+	\begin{tabular}{l|l|l|l|l|l|l|ll}
+		& \multicolumn{2}{l|}{Treino} & \multicolumn{2}{l|}{Validação} & \multicolumn{2}{l|}{Treino/Validação} & \multicolumn{2}{l}{Teste}              \\ \hline
+		& imagens      & Objetos      & Imagens        & Objetos       & Imagens           & Objetos           & \multicolumn{1}{l|}{Imagens} & Objetos \\ \hline
+		Avião          & 112          & 151          & 126            & 155           & 238               & 306               & \multicolumn{1}{l|}{204}     & 285     \\
+		Bicicleta      & 116          & 176          & 127            & 177           & 243               & 353               & \multicolumn{1}{l|}{239}     & 282     \\
+		Pássaro        & 180          & 243          & 150            & 243           & 330               & 486               & \multicolumn{1}{l|}{282}     & 459     \\
+		Barco          & 81           & 140          & 100            & 150           & 181               & 290               & \multicolumn{1}{l|}{172}     & 263     \\
+		Garrafa        & 139          & 253          & 105            & 252           & 244               & 505               & \multicolumn{1}{l|}{212}     & 469     \\
+		Ônibus         & 97           & 115          & 89             & 114           & 186               & 229               & \multicolumn{1}{l|}{174}     & 213     \\
+		Carro          & 376          & 625          & 337            & 625           & 713               & 1250              & \multicolumn{1}{l|}{721}     & 1201    \\
+		Gato           & 163          & 186          & 174            & 190           & 337               & 376               & \multicolumn{1}{l|}{322}     & 358     \\
+		Cadeira        & 224          & 400          & 221            & 398           & 445               & 798               & \multicolumn{1}{l|}{417}     & 756     \\
+		Vaca           & 69           & 136          & 72             & 123           & 141               & 259               & \multicolumn{1}{l|}{127}     & 244     \\
+		Mesa de Jantar & 97           & 103          & 103            & 112           & 200               & 215               & \multicolumn{1}{l|}{190}     & 206     \\
+		Cão            & 203          & 253          & 218            & 257           & 421               & 510               & \multicolumn{1}{l|}{418}     & 489     \\
+		Cavalo         & 139          & 182          & 148            & 180           & 287               & 362               & \multicolumn{1}{l|}{274}     & 348     \\
+		Motocicleta    & 120          & 167          & 125            & 172           & 245               & 339               & \multicolumn{1}{l|}{222}     & 325     \\
+		Pessoa         & 1025         & 2358         & 983            & 2332          & 2008              & 4690              & \multicolumn{1}{l|}{2007}    & 4528    \\
+		Vaso de planta & 133          & 248          & 112            & 266           & 245               & 514               & \multicolumn{1}{l|}{224}     & 480     \\
+		Ovelha         & 48           & 130          & 48             & 127           & 96                & 257               & \multicolumn{1}{l|}{97}      & 242     \\
+		Sofá           & 111          & 124          & 118            & 124           & 229               & 248               & \multicolumn{1}{l|}{223}     & 239     \\
+		Trem           & 127          & 145          & 134            & 152           & 261               & 297               & \multicolumn{1}{l|}{259}     & 282     \\
+		Monitor/TV     & 128          & 166          & 128            & 158           & 256               & 324               & \multicolumn{1}{l|}{299}     & 308     \\
+		Total          & 2501         & 6301         & 2510           & 6307          & 5011              & 12608             & \multicolumn{1}{l|}{4952}    & 12032  
+	\end{tabular}
+	\\
+	\captionfont{\small{\textbf{\\Fonte: Adaptado de \citeonline{everingham-2010}.}}}
+\end{table}
+
+Analisando a tabela é possível perceber que a base é desbalanceada. A classe pessoa, por exemplo, está presente em mais de 1000 imagens e tem mais de 2000 instâncias apenas no conjunto de treinamento. Enquanto isso, a classe ovelha aparece apenas 130 vezes em 48 imagens no conjunto de treinamento. Esse desbalanceamento pode ser um desafio durante o treinamento caso o modelo não seja robusto. A Figura \ref{fig:pascal2007} mostra exemplos das classes presentes na \ac{PASCAL VOC} 2007.
+
+\begin{figure}[H]
+	% Alterar espaçamentos antes e depois do caption
+	\setlength{\abovecaptionskip}{0pt}
+	\setlength{\belowcaptionskip}{0pt}
+	% Caption
+	\caption[Imagens PASCAL VOC 2007]{Exemplos de imagens da PASCAL VOC 2007}
+	\centering
+	\includegraphics[width=.9\textwidth]{imagem/0x_pascal2007.jpg}
+	% Caption centralizada
+	\captionsetup{justification=centering}
+	\captionfont{\small{\textbf{\\Fonte: \citeonline{everingham-2010}.}}}	
+	\label{fig:pascal2007}
+\end{figure}
+
+\subsection{PASCAL VOC 2012}
+\label{section:3:4:1}
+
+Em 2012 foi lançado uma outra versão da \ac{PASCAL VOC}. Essa edição da competição tinha uma base de dados maior e mais robusta, embora ainda mantivesse as mesmas 20 classes da base de 2007.
