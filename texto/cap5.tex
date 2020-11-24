@@ -161,7 +161,13 @@ Depois dos experimentos, foram feitos os testes para avaliar de forma numérica 
   \end{table}
 
 % Fazer analise comparativa com os resultados.
+Com base na Tabela \ref{tab:resultados} podemos ver que os resultados estão um pouco abaixo dos obtidos por \citeonline{wei-2015} e \citeonline{cheng-2017}. Apesar disso, pode-se observar que o modelo se saiu muito bem em algumas classes como Avião, Carro, Motocicleta, Cavalo e bicicleta, chegando a ter resultados melhores que os outros modelos em algumas delas.
 
+A principal dificuldade está nos objetos mais difíceis, onde o modelo não conseguiu se ajustar bem, e acabou apresentando resultados muito inferiores aos obtidos pelos outros métodos. Entre essas classes, podemos destacar o vaso de planta, a cadeira, e a Garrafa. Algumas dessas classes o modelo perde por uma discrepância de mais de 10 pontos percentuais.
+
+A diferença nos resultados se deve a alguns fatores. Entre eles podemos citar o tamanho do lote de treinamento. Enquanto o nosso modelo foi treinado com 12 imagens por lote, os modelos de \citeonline{wei-2015} e \citeonline{cheng-2017} foram treinados usando um lote de 32 imagens. 
+
+Além disso, devido ao número menor no lote de treinamento, foi necessário aumentar o número de épocas e iterações para garantir a convergência. O aumento de iterações com lotes menores pode causar um \textit{Overfitting} que é quando o modelo aprende os dados específicos ao invés de aprender a generalizar com base nos dados.
 
 % O resultado evidencia algumas dificuldades que o modelo apresentou conforme visto na seção \ref{secao:5:1:2} e não está no mesmo nível que os resultados obtidos por \citeonline{wei-2015} e \citeonline{cheng-2017}.
 

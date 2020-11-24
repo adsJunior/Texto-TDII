@@ -1,8 +1,14 @@
 \chapter{Conclusão}
 \label{cap:6}
 
-Com base no conteúdo apresentado, podemos concluir que, embora um modelo de \textit{deep learning} possa obter bons resultados em tarefas de classificação e localização de objetos, é necessário ter cuidado com uma série de fatores antes de fazer a implementação, pois isso pode afetar os resultados de uma forma negativa. É importante conhecer bem o modelo implementado, estudar os hiper-parâmetros e fazer vários testes para garantir que o resultado saia como o esperado.
+O uso de redes neurais convolutivas tem se tornado cada vez mais comum nos problemas relacionados a imagens, principalmente devido aos resultados alcançados. Isso faz que cada vez mais modelos e técnicas avançadas sejam desenvolvidas com o objetivo de melhorar os resultados.
+
+Uma dificuldade, porém com os modelos de \textit{Deep Learning} é a necessidade de um grande volume de dados para fazer o treinamento de forma adequada. Além disso, criar uma base de dados para classificação e regressão é custoso, pois todos os dados devem estar anotados manualmente. Além de precisar de um grande volume de dados, também é necessário que a base esteja bem balanceada ou os resultados podem ser prejudicados.
+
+Já existem estratégias de normalização e regularização que ajudam o modelo a não ser tão penalizado pelo desbalanceamento da base. Além disso, uma estratégia bem simples e bem eficaz para ajudar a contornar o problema da falta de dados, é o \textit{data augmentation}.
+
+Os resultados apresentados, mostram que as redes neurais densas podem ser usadas para fazer as tarefas de Localização e Classificação de objetos, desde que o modelo seja bem ajustado e bem treinado. Os resultados obtidos foram ligeiramente inferiores aos da literatura, mas isso de deve, principalmente ao lote de imagens usado no treinamento do nosso modelo que foi bem menor do que o usado nos métodos comparados. 
 
 \section{Trabalhos Futuros}
 
-Como trabalhos futuros, espera-se fazer um teste com o modelo desenvolvido treinando-o com mais imagens por iteração. Além disso, espera-se também fazer uma implementação usando as camadas de deconvolução.
+Como trabalhos futuros, espera-se fazer um teste com o modelo desenvolvido treinando-o com mais imagens por iteração. Além disso, espera-se também fazer uma implementação usando as camadas de deconvolução, ou outras formas mais avançadas de melhorar a precisão da classificação. Também propõe-se o uso de imagens com resoluções maiores e a avaliação de quantos quadros o modelo consegue processar por segundo.
