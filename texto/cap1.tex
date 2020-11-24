@@ -90,16 +90,19 @@ Estudos envolvendo redes neurais convolucionais têm sido realizados com muita f
 Além disso, o problema de classificação e detecção de objetos tem sido aproveitado como solução para problemas mais específicos, como detecção facial \cite{yang-2018}, contagem de pessoas \cite{pren-2017} e detecção de pedestres \cite{lan-2018}. 
 
 %%% p3 Mencionar a espectativa ao usar deconvolução
-Por fim o uso das camadas de deconvolução no método proposto traz boas expectativas, uma vez que já há resultados na literatura que mostram a sua eficiência \cite{noh:2015, cheng-2017}. Em suma, pode-se dizer que o tema ainda tem muito que ser explorado, que a proposta é promissora, e que bons resultados podem trazer contribuições para trabalhos futuros.
+Por fim o uso de camadas adicionais de convolução ao final de uma \ac{CNN} pode gerar bons resultados na localização e classificação de objetos como apresentado por \citeonline{wei-2015} e \citeonline{cheng-2017}. Em suma, pode-se dizer que o tema ainda tem muito que ser explorado, que a proposta é promissora, e que bons resultados podem trazer contribuições para trabalhos futuros.
+
+%Por fim o uso das camadas de deconvolução no método proposto traz boas expectativas, uma vez que já há resultados na literatura que mostram a sua eficiência \cite{noh:2015, cheng-2017}. Em suma, pode-se dizer que o tema ainda tem muito que ser explorado, que a proposta é promissora, e que bons resultados podem trazer contribuições para trabalhos futuros.
 
 \section{Objetivos}
 \label{secao:1:2}  
 
-O objetivo do trabalho é utilizar a rede \ac{DenseNet}121 modificada com camadas adicionais de convolução e deconvolução para fazer detecção e classificação de objetos. Para isso, será necessário:
+O objetivo do trabalho é utilizar a rede \ac{DenseNet}121 modificada com camadas adicionais de convolução %e deconvolução 
+para fazer detecção e classificação de objetos. Para isso, será necessário:
 
 \begin{itemize}
 	\item Adaptar a \ac{CNN} \ac{DenseNet} \cite{liu-2017} para fazer localização e classificação de forma similar à \ac{SSD};
-	\item Alterar a arquitetura da rede inicial para receber camadas de deconvolução de forma a melhorar os resultados da classificação e da Localização;
+	%\item Alterar a arquitetura da rede inicial para receber camadas de deconvolução de forma a melhorar os resultados da classificação e da Localização;
 	\item Avaliar os resultados obtidos comparando-os com a literatura.
 \end{itemize}
 
@@ -112,9 +115,9 @@ Nesse sentido, todos os dias são estudados novos algoritmos e novas técnicas p
 
 É válido estabelecer que ``os mecanismos sensitivos dos seres humanos (como visão e audição) sugerem a necessidade de uma arquitetura profunda para extrair a sua estrutura complexa'' \cite{deng-2014}. Porém, de acordo com \citeonline{caelles-2017}, uma grande limitação ao utilizar arquiteturas de \emph{Deep Learning} é a necessidade de treinamento com um grande volume de dados. Essa limitação torna o processo mais custoso em termos de tempo de processamento e outros recursos computacionais(como memória). Além disso, a base de dados deve ter os resultados da classificação e localização esperados feitos de forma manual, o que aumenta o esforço humano.
 
-Tendo isso em vista, a proposta de utilizar a \ac{DenseNet} \cite{liu-2017} pré-treinada em classificação de imagens visa diminuir o custo por meio do \textit{Transfer Learning}. Além disso, utilizando as camadas adicionais de deconvolução como proposto por \citeonline{cheng-2017}, espera-se obter resultados ainda melhores. Esses resultados melhores repercutiriam de forma positiva em outras áreas relacionadas à localização e classificação de objetos. 
+Tendo isso em vista, a proposta de utilizar a \ac{DenseNet} \cite{liu-2017} pré-treinada em classificação de imagens visa diminuir o custo por meio do \textit{Transfer Learning}. Além disso, utilizando as camadas adicionais de convolução como proposto por \citeonline{wei-2015}, espera-se obter resultados ainda melhores. Esses resultados melhores repercutiriam de forma positiva em outras áreas relacionadas à localização e classificação de objetos. 
 
 \section{Organização do texto}
 \label{secao:1:4}
 
-O Capítulo \ref{cap:2} traz os principais conceitos relacionados à \textit{Deep Learning}, redes neurais artificiais, classificação de objetos em imagens e detecção de objetos em imagens, necessários à compreensão do trabalho. O Capítulo \ref{cap:3} contém um resumo dos trabalhos relacionados à monografia. O Capítulo \ref{cap:4} contém a metodologia a ser seguida para o desenvolvimento do trabalho. Além disso contém um cronograma a ser seguido e a definição das métricas a ser utilizadas para avaliar os resultados obtidos. O Capítulo \ref{cap:5} descreve os experimentos realizados e os resultados obtidos. O Capítulo \ref{cap:6} apresenta a conclusão do trabalho com base nos resultados obtidos e apresenta propostas de trabalhos futuros.
+O Capítulo \ref{cap:2} traz os principais conceitos relacionados à \textit{Deep Learning}, redes neurais artificiais, classificação de objetos em imagens e detecção de objetos em imagens, necessários à compreensão do trabalho. O Capítulo \ref{cap:3} contém um resumo dos trabalhos relacionados à monografia. O Capítulo \ref{cap:4} contém a metodologia a ser seguida para o desenvolvimento do trabalho. O Capítulo \ref{cap:5} descreve os experimentos realizados e os resultados obtidos. O Capítulo \ref{cap:6} apresenta a conclusão do trabalho com base nos resultados obtidos e apresenta propostas de trabalhos futuros.

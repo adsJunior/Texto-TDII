@@ -128,7 +128,7 @@ Depois dos experimentos, foram feitos os testes para avaliar de forma numérica 
     \setlength{\belowcaptionskip}{0pt}
 % Caption
     \caption[Resultados SSD]{Comparação SSD300, SSD321 e SSD311}
-    \label{tab:classesNas}
+    \label{tab:resultados}
 % Conteúdo da tabela
     \begin{tabular}{c|c|c|c}
 	Objeto &	SSD311(nosso) & SSD300 & SSD321 \\ 
@@ -160,6 +160,9 @@ Depois dos experimentos, foram feitos os testes para avaliar de forma numérica 
     \captionfont{\small{\textbf{\\Fonte: Elaborado pelo autor.}}}
   \end{table}
 
-O resultado evidencia algumas dificuldades que o modelo apresentou conforme visto na seção \ref{secao:5:1:2} e não está no mesmo nível que os resultados obtidos por \citeonline{wei-2015} e \citeonline{cheng-2017}.
+% Fazer analise comparativa com os resultados.
 
-Esse problema pode ser justificado por dois fatores principais. Por limitações computacionais, só foi possível fazer o treinamento com 12 imagens por iteração, enquanto que os modelos de \citeonline{wei-2015} e \citeonline{cheng-2017} treinaram com 32 imagens por iteração. Pelo fato do número de imagens por iteração ser menor, foi necessário treinar por mais iterações o que pode acarretar em um segundo problema: \textit{overfitting}, que é quando o modelo começa a aprender os dados específicos ao invés de aprender a fazer a classificação de forma mais generalista.
+
+% O resultado evidencia algumas dificuldades que o modelo apresentou conforme visto na seção \ref{secao:5:1:2} e não está no mesmo nível que os resultados obtidos por \citeonline{wei-2015} e \citeonline{cheng-2017}.
+
+% Esse problema pode ser justificado por dois fatores principais. Por limitações computacionais, só foi possível fazer o treinamento com 12 imagens por iteração, enquanto que os modelos de \citeonline{wei-2015} e \citeonline{cheng-2017} treinaram com 32 imagens por iteração. Pelo fato do número de imagens por iteração ser menor, foi necessário treinar por mais iterações o que pode acarretar em um segundo problema: \textit{overfitting}, que é quando o modelo começa a aprender os dados específicos ao invés de aprender a fazer a classificação de forma mais generalista.

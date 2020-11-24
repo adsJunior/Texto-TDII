@@ -182,4 +182,83 @@ Analisando a tabela é possível perceber que a base é desbalanceada. A classe 
 \subsection{PASCAL VOC 2012}
 \label{section:3:4:1}
 
-Em 2012 foi lançado uma outra versão da \ac{PASCAL VOC}. Essa edição da competição tinha uma base de dados maior e mais robusta, embora ainda mantivesse as mesmas 20 classes da base de 2007.
+Em 2012 foi lançado uma outra versão da \ac{PASCAL VOC}. Essa edição da competição tinha uma base de dados maior e mais robusta, embora ainda mantivesse as mesmas 20 classes da base de 2007. A tabela \ref{tab:voc2012} mostra a distribuição de imagens e objetos na base \ac{PASCAL VOC} 2012. Nela será possível perceber o mesmo desbalanceamento encontrado na base de 2007. Porém, uma vantagem é que ela tem mais imagens, se comparada à base de 2007. Além disso, como as bases são completamente distintas, podem ser usadas em conjunto para o treinamento e a validação dos modelos.
+
+\begin{table}[H]
+	\centering
+	\footnotesize
+	% Alterar espaçamentos antes e depois do caption
+	\setlength{\abovecaptionskip}{0pt}
+	\setlength{\belowcaptionskip}{0pt}
+	% Caption
+	\caption[Pascal VOC 2012]{Classes de imagens do PASCAL VOC 2012}
+	\label{tab:voc2012}
+	\begin{tabular}{l|l|l|l|l|l|l}
+		& \multicolumn{2}{l|}{Treino} & \multicolumn{2}{l|}{Validação} & \multicolumn{2}{l}{Treino/Validação} \\ \hline
+		& imagens      & Objetos      & Imagens        & Objetos       & Imagens           & Objetos           \\ \hline
+		Avião          & 327          & 432          & 343            & 433           & 670               & 865               \\
+		Bicicleta      & 268          & 353          & 284            & 358           & 552               & 711               \\
+		Pássaro        & 395          & 560          & 370            & 559           & 765               & 1119              \\
+		Barco          & 260          & 426          & 248            & 424           & 508               & 850               \\
+		Garrafa        & 365          & 629          & 341            & 630           & 706               & 1259              \\
+		Ônibus         & 213          & 292          & 208            & 301           & 421               & 593               \\
+		Carro          & 590          & 1013         & 571            & 1004          & 1161              & 2017              \\
+		Gato           & 539          & 605          & 541            & 612           & 1080              & 1217              \\
+		Cadeira        & 566          & 1178         & 553            & 1176          & 1119              & 2354              \\
+		Vaca           & 151          & 290          & 152            & 298           & 303               & 588               \\
+		Mesa de Jantar & 269          & 304          & 269            & 305           & 538               & 609               \\
+		Cão            & 632          & 756          & 654            & 759           & 1286              & 1515              \\
+		Cavalo         & 237          & 350          & 245            & 360           & 482               & 710               \\
+		Motocicleta    & 265          & 357          & 261            & 356           & 526               & 713               \\
+		Pessoa         & 1994         & 4194         & 2093           & 4372          & 4087              & 8566              \\
+		Vaso de planta & 269          & 484          & 258            & 489           & 527               & 973               \\
+		Ovelha         & 171          & 400          & 154            & 413           & 325               & 813               \\
+		Sofá           & 257          & 281          & 250            & 285           & 507               & 566               \\
+		Trem           & 273          & 313          & 271            & 315           & 544               & 628               \\
+		Monitor/TV     & 290          & 392          & 285            & 392           & 575               & 784               \\
+		Total          & 5717         & 13609        & 5823           & 13841         & 11540             & 27450            
+	\end{tabular}
+\\
+\captionfont{\small{\textbf{\\Fonte: Adaptado de \citeonline{everingham-2011}.}}}
+\end{table}
+
+\subsection{Métricas}
+\label{section:3:4:2}
+
+A principal métrica utilizada para avaliar trabalhos de Localização e Classificação é a \ac{mAP}. Para deduzir o \ac{mAP}, é necessário definir os conceitos de Precisão e Revocação. Então seja $TP$ os verdadeiros positivos encontrados por um modelo, $FN$ os falsos negativos e $FP$ os falsos positivos (os verdadeiros negativos não entram no cálculo pois os modelos não são treinados com base no \textit{ground-truth} do \textit{background}). A Precisão $P$ pode ser definida pela Equação \ref{eq:eq9}.
+
+\begin{equation}
+	\label{eq:eq9}
+	P = \dfrac{TP}{TP+FP}
+\end{equation}
+
+\noindent
+Ao passo que a revocação $R$ pode ser definida pela Equação \ref{eq:eq10}.
+
+\begin{equation}
+	\label{eq:eq10}
+	R = \dfrac{TP}{TP+FN}
+\end{equation}
+
+Uma vez que se tenha os valores de precisão e revocação, é traçada a curva $P \times R$. Essa curva se comporta com $R$ Aumentando a medida que aumentam os falsos negativos e com $P$ oscilando e fazendo ``zigue-zague''. O valor teórico da Precisão média é determinado pela área sobre a curva $P \times R$ como está descrito na Equação \ref{eq:eq11}.
+
+\begin{equation}
+	\label{eq:eq11}
+	AP = \int_{0}^{1}P(R)dR
+\end{equation}
+
+Porém, como mencionado anteriormente, a curva $P \times R$ se comporta de forma não-linear fazendo ``zigue-zague''. Esse comportamento dificulta um cálculo preciso da área sobre a curva. Para contornar essa dificuldade, \citeonline{salton-1986} propuseram que o valor da precisão média fosse interpolado de acordo com a Equação \ref{eq:eq12}
+
+\begin{equation}
+	\label{eq:eq12}
+	AP = \dfrac{1}{11} \sum_{R_i \in \{0.0, 0.1, .. 1.0\}} max(P(R_i))
+\end{equation}
+
+\citeonline{everingham-2015} porém começaram a adotar uma forma diferente de calcular a integral a partir de 2010. Ao invés de fazer a interpolação como na Equação \ref{eq:eq12}, eles passaram a calcular a integral pela regra dos trapézios, definida pela Equação \ref{eq:eq13}.
+
+\begin{equation}
+	\label{eq:eq13}
+	AP = \dfrac{0.1}{2}[P(R_0) + P(R_1) + 2.\sum_{R_i \in \{0.1, 0.1, .., 0.9\}}P(R_i)]
+\end{equation}
+
+Sendo assim, o \ac{mAP} pode ser definido como a média das precisões médias por classe.
