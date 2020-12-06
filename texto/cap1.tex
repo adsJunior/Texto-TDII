@@ -52,6 +52,8 @@ Em \citeyear{he-2016}, \citeauthor{he-2016} propuseram a \ac{ResNet} que introdu
 
 Seguindo a mesma ideia de \textit{skip connection} proposta por \citeonline{he-2016}, \citeonline{liu-2017} propuseram a \ac{DenseNet}. Nessa nova arquitetura houveram duas mudanças com relação à \ac{ResNet}. A primeira mudança é que as saídas das camadas não seriam mais somadas, mas sim concatenadas, ou empilhadas. A segunda é que em um bloco residual as camadas se conectam com todas as suas sucessoras. 
 
+A Figura \ref{fig:blocodenso} mostra como se conectam as camadas na \ac{DenseNet}. Supondo que temos um bloco denso $B$ com um conjunto de 5 camadas $C = \{c_1, c_2, c_3, c_4, c_5\}$. Como explicado no parágrafo anterior, a saída das camadas serão utilizadas em todas as camadas subsequentes no mesmo bloco. Sendo assim, a entrada de $c_3$ será composta pelas saídas de $c_1$ e $c_2$ concatenadas, e assim sucessivamente. Além disso, como as saídas são concatenadas e não somadas, a tendência é que as entradas cresçam a medida que a rede se aprofunda. O conceito de bloco denso permite propagar múltiplos níveis de abstração ao longo de toda a rede, melhorando assim os resultados obtidos \cite{liu-2017}.
+
 \begin{figure}[H]
 	% Alterar espaçamentos antes e depois do caption
 	\setlength{\abovecaptionskip}{0pt}
@@ -65,8 +67,6 @@ Seguindo a mesma ideia de \textit{skip connection} proposta por \citeonline{he-2
 	\captionfont{\small{\textbf{\\Fonte: \citeonline{liu-2017}.}}}	
 	\label{fig:blocodenso}
 \end{figure}
-
-A Figura \ref{fig:blocodenso} mostra como se conectam as camadas na \ac{DenseNet}. Supondo que temos um bloco denso $B$ com um conjunto de 5 camadas $C = \{c_1, c_2, c_3, c_4, c_5\}$. Como explicado no parágrafo anterior, a saída das camadas serão utilizadas em todas as camadas subsequentes no mesmo bloco. Sendo assim, a entrada de $c_3$ será composta pelas saídas de $c_1$ e $c_2$ concatenadas, e assim sucessivamente. Além disso, como as saídas são concatenadas e não somadas, a tendência é que as entradas cresçam a medida que a rede se aprofunda. O conceito de bloco denso permite propagar múltiplos níveis de abstração ao longo de toda a rede, melhorando assim os resultados obtidos \cite{liu-2017}.
 
 \citeauthor{liu-2017} ficaram em segundo lugar no \ac{ILSVRC} de 2017 e venceram o prêmio de melhor artigo da \ac{CVPR} do mesmo ano.
 % Mover para revisão bibliográfica ou Trabalhos Relacionados - fim

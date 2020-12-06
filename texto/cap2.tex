@@ -3,13 +3,13 @@
 \label{cap:2}
 \vspace{-1.9cm}
 
-%Neste capítulo serão apresentados os principais conceitos e definições da literatura sobre \ac{RNA}, Deep Learning, classificação e localização de objetos.
+Neste capítulo serão apresentados os principais conceitos e definições da literatura sobre \ac{RNA}, Deep Learning, classificação e localização de objetos.
 
 \section{\textit{Machine Learning}}
 \label{secao:2:1}
 \vspace{-.6cm}
 
-\textit{Machine Learning} ou Aprendizado de Máquina é um campo de estudo cada vez mais recorrente na área de tecnologia. Em uma definição alternativa, pode-se dizer que ``Aprendizado de Máquina é uma área de Inteligência Artificial cujo objetivo é o desenvolvimento de técnicas computacionais sobre o aprendizado bem como a construção de sistemas capazes de adquirir conhecimento de forma automática'' \cite{monard-2003}. Entre as principais aplicações de Aprendizado de máquina, pode se destacar o reconhecimento de padrões, classificação de imagens e a mineração de dados. 
+\textit{Machine Learning} ou Aprendizado de Máquina é um campo de estudo cada vez mais recorrente na área de tecnologia. Em uma definição alternativa, pode-se dizer que ``[...]Aprendizado de Máquina é uma área de Inteligência Artificial cujo objetivo é o desenvolvimento de técnicas computacionais sobre o aprendizado bem como a construção de sistemas capazes de adquirir conhecimento de forma automática.'' \cite{monard-2003}. Entre as principais aplicações de Aprendizado de máquina, pode se destacar o reconhecimento de padrões, classificação de imagens e a mineração de dados. 
 
 \citeonline{monard-2003} definem ainda que o aprendizado de máquina pode ser supervisionado ou não-supervisionado. Quando falamos do primeiro caso, queremos dizer que o algoritmo recebe um conjunto de dados na entrada, processa esses dados e retorna uma saída. Essa saída é comparada com um valor previamente associado à entrada, comumente conhecido como rótulo. Já no aprendizado não-supervisionado, as entradas não possuem rótulo algum, cabendo ao algoritmo fazer a distinção das diversas entradas. Geralmente, nesses casos é necessária uma análise posterior à execução do algoritmo para se entender os resultados obtidos.
 
@@ -17,26 +17,25 @@ O aprendizado supervisionado se divide em dois grupos menores: classificação e
 
 As seções \ref{subsecao:2:1:1} e \ref{subsecao:2:1:2} irão definir melhor esses conceitos.
 
-\vspace{-1cm}
 \subsection{Regressão}
 \label{subsecao:2:1:1}
 
-Como definido anteriormente, o problema de regressão consiste em calcular para cada entrada uma saída que possua um valor contínuo. \citeonline{dosualdo-2003} define que a regressão consiste em fazer uma relação entre os atributos $X={x_1, x_2,..., x_n}$ - onde $X$ é o conjunto de entrada e cada $x_i$ é um atributo numérico ou quantitativo - e $Y$, tal que $Y$ é um atributo ou um conjunto de atributos meta. \citeonline{apte-1997} definem essa relação através da Equação  \ref{eq:eq1}.
+Como definido anteriormente, o problema de regressão consiste em calcular para cada entrada uma saída que possua um valor contínuo. \citeonline{dosualdo-2003} define que a regressão consiste em fazer uma relação entre os atributos $X={x_1, x_2,..., x_n}$ - onde $X$ é o conjunto de entrada e cada $x_i$ é um atributo numérico ou quantitativo - e $Y$, tal que $Y$ é um atributo ou um conjunto de atributos meta. \citeonline{apte-1997} definem essa relação por meio da Equação  \ref{eq:eq1}.
 
 \begin{equation}
 \label{eq:eq1}
 	Y = f(x_1, x_2,..., x_n)
 \end{equation}
 
-A relação entre o(s) atributo(s) $X$ e o(s) atributo(s)-meta $Y$ alcançada como resultado de um algoritmo de regressão é chamado de modelo. Após a definição do modelo é importante fazer uma avaliação para dizer o quão confiável será a predição gerada pelo modelo. Existem diversas funções usadas na avaliação dos algoritmos de regressão, e uma das mais comuns é o \ac{MLS} que é definido pela Equação  \ref{eq:eq2}.
+A relação entre o(s) atributo(s) $X$ e o(s) atributo(s)-meta $Y$ alcançada como resultado de um algoritmo de regressão é chamado de modelo. Após a definição do modelo é importante fazer uma avaliação para dizer o quão confiável será a predição gerada pelo modelo. Existem diversas funções usadas na avaliação dos algoritmos de regressão, e uma das mais comuns é o \ac{MSE} que é definido pela Equação  \ref{eq:eq2}.
 
 \begin{equation}
 \label{eq:eq2}
-	E = \sum_{i = 0}^{N}(Y_i - f(X)_i)^2
+	E = \dfrac{1}{N}\sum_{i = 0}^{N}(Y_i - f(X)_i)^2
 \end{equation}
 
 \noindent
-Em que $E$ é o erro, $N$ é o tamanho do conjunto de amostras, $Y_i$ é o valor esperado do atributo-meta e $f(X_i)$ é o resultado do modelo para a entrada $X_i$.
+Em que $E$ é o erro, $N$ é o tamanho do conjunto de amostras, $Y_i$ é o valor esperado do atributo-meta e $f(X_i)$ é o resultado do modelo para a entrada $X_i$. O objetivo do treinamento da predição, é minimizar esse erro quadrático, de forma que - em tese - o resultado previsto seja próximo do esperado.
 
 Alguns exemplos de problemas de regressão são: 
 
@@ -50,7 +49,7 @@ Uma grande limitação nos métodos de regressão é que eles em sua maioria sol
 \subsection{Classificação}
 \label{subsecao:2:1:2}
 
-Como definido anteriormente, o problema de classificação consiste em um problema de predição quando as saídas são discretas. A ideia dos algoritmos de classificação é definir para cada entrada, um rótulo ou classe no meio de um conjunto finito de rótulos. Um método estatístico muito utilizado nos problemas de classificação é a regressão logística. A regressão logística é bem similar à regressão linear, com a diferença que o resultado é um número entre zero e um, configurando na verdade, a probabilidade de, dado uma entrada $X$ tal que $X = {x_1, x_2, ..., x_n}$ gerar uma saída verdadeira para a hipótese $Y$. Normalmente, os modelos de regressão logística aplica a função sigmóide, descrita pela Equação  \ref{eq:eq3}.
+Como mencionado anteriormente, o problema de classificação consiste em fazer uma predição quando as saídas são discretas. A ideia dos algoritmos de classificação é definir para cada entrada, um rótulo ou classe no meio de um conjunto finito de rótulos. Um método estatístico muito utilizado nos problemas de classificação é a regressão logística. A regressão logística é bem similar à regressão linear, com a diferença que o resultado é um número entre zero e um, configurando na verdade, a probabilidade de, dado uma entrada $X$ tal que $X = {x_1, x_2, ..., x_n}$ gerar uma saída verdadeira para a hipótese $Y$. Normalmente, os modelos de regressão logística aplicam a função sigmóide, descrita pela Equação  \ref{eq:eq3}.
 
 \begin{equation}
 \label{eq:eq3}
@@ -72,12 +71,12 @@ Com base na primeira abordagem, começou a ser utilizada uma função para os pr
 	f(x)_i = \dfrac{e^{\beta x_i}}{\sum_{j = 1}^{K}e^{\beta x_j}} \forall i = 1,...,K e x = {x_1, ... ,x_k} \in X^K
 \end{equation}
 
-Assim como na regressão linear, a perda na regressão logística pode ser calculado pelo \ac{MLS}. Porém, com o tempo, surgiram outras funções que calculam a perda de forma mais eficiente em problemas de classificação.
+Assim como na regressão linear, a perda na regressão logística pode ser calculado pelo \ac{MSE}. Porém, com o tempo, surgiram outras funções que calculam a perda de forma mais eficiente em problemas de classificação.
 
 \section{Redes Neurais Artificiais}
 \label{secao:2:2}
 
-As \ac{RNA} são uma das principais técnicas de aprendizagem de máquina e podem ser implementadas tanto para problemas supervisionados, quanto não-supervisionados. \citeonline{jost-2015} definiu as \ac{RNA}s da seguinte forma:
+As \ac{RNA}s são uma das principais técnicas de aprendizagem de máquina e podem ser implementadas tanto para problemas supervisionados, quanto não-supervisionados. \citeonline{jost-2015} definiu as \ac{RNA}s da seguinte forma:
 
 \begin{citacao}
 	As \ac{RNA}s possuem inspiração nas redes neurais biológicas, constituídas de neurônios separados por camadas, que processam informações e estão conectados via pesos sinápticos, sendo na maioria das vezes sistemas adaptativos que modificam sua estrutura através de informações, que fluem pela rede durante a etapa de aprendizado \cite{jost-2015}.
@@ -123,7 +122,7 @@ Sabendo-se disso, o objetivo para melhorar a precisão da \ac{MLP} é minimizar 
 
 A principio não parecia ser viável manipular arquiteturas profundas de redes neurais. Porém, de acordo com \citeonline{deng-2014}, surgiu um algoritmo de aprendizado não-supervisionado que conseguiu aliviar empiricamente as dificuldades de otimização em arquiteturas profundas. Esse algoritmo é a \ac{DBN}, um modelo generativo profundo composto de uma camada visível e várias camadas ocultas compostas por uma pilha de \ac{RBM}s.
 
-\citeonline{deng-2014} definem ainda que o aprendizado nas \ac{DBN}s é feito por um algoritmo guloso que ajustas os pesos camada-por-camada com uma complexidade linear ao tamanho e à profundidade da rede. E uma relação inesperada entre as \ac{DBN}s e as \ac{MLP}s surgiu quando descobriu-se que ao utilizar os pesos de uma \ac{DBN} com arquitetura correspondente, você consegue inicializar os pesos de uma \ac{MLP} de forma a produzir melhores resultados do que utilizando pesos aleatórios.
+\citeonline{deng-2014} definem ainda que o aprendizado nas \ac{DBN}s é feito por um algoritmo guloso que ajusta os pesos camada-por-camada com uma complexidade linear ao tamanho e à profundidade da rede. E uma relação inesperada entre as \ac{DBN}s e as \ac{MLP}s surgiu quando descobriu-se que ao utilizar os pesos de uma \ac{DBN} com arquitetura correspondente, você consegue inicializar os pesos de uma \ac{MLP} de forma a produzir melhores resultados do que utilizando pesos aleatórios.
 
 Uma segunda alternativa para trabalhar com aumento de camadas é o empilhamento de auto-codificadores. O empilhamento de auto-codificadores consiste basicamente em inserir na saída de uma rede neural uma segunda rede neural que para cada entrada produz uma saída específica e retreinar a nova rede neural utilizando o algoritmo de retropropagação de erro \cite{deng-2014}.
 

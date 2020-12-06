@@ -3,12 +3,14 @@
 \label{cap:3}
 \vspace{-1.9cm}
 
+Neste capítulo serão apresentados os trabalhos na literatura que possuem relação com o trabalho proposto.
+
 \section{DenseNet}
 \label{secao:3:1}
 
-Como mencionado anteriormente, desde 2012 as tarefas de classificação de imagens são resolvidas majoritariamente por arquiteturas de \textit{Deep Learning}. \citeonline{he-2016} propôs uma nova arquitetura que utilizava o conceito de \textit{skip connection}, que, como explicado anteriormente, consiste em utilizar a saída de uma camada em camadas posteriores além da próxima. O conceito de \textit{skip connection} fez tanto sucesso que tornou a ser utilizado em um modelo mais recente. \cite{liu-2017} propuseram um modelo de \ac{CNN} que utiliza esse mesmo conceito, porém de uma forma um pouco diferente. 
+Como mencionado anteriormente, desde 2012 as tarefas de classificação de imagens são resolvidas majoritariamente por arquiteturas de \textit{Deep Learning}. \citeonline{he-2016} propuseram uma nova arquitetura que utilizava o conceito de \textit{skip connection}, que, como explicado anteriormente, consiste em utilizar a saída de uma camada em camadas posteriores além da próxima. O conceito de \textit{skip connection} fez tanto sucesso que tornou a ser utilizado em um modelo mais recente. \citeonline{liu-2017} propuseram um modelo de \ac{CNN} que utiliza esse mesmo conceito, porém de uma forma um pouco diferente. 
 
-Nas \ac{ResNet}s, existem os blocos residuais, conforme a figura \ref{fig:blocoresidual}. No bloco residual temos duas camadas $c_1$ e $c_2$ onde $c_1$ é a entrada de $c_2$. Na saída deste bloco residual será feita uma soma de matrizes entre a saída de $c_2$ e a entrada de $c_1$ e essa soma será usada na entrada das camadas posteriores. 
+Nas \ac{ResNet}s, existem os blocos residuais, conforme a Figura \ref{fig:blocoresidual}. No bloco residual temos duas camadas $c_1$ e $c_2$ onde $c_1$ é a entrada de $c_2$. Na saída deste bloco residual será feita uma soma de matrizes entre a saída de $c_2$ e a entrada de $c_1$ e essa soma será usada na entrada das camadas posteriores. 
 
 Nas \ac{DenseNet}s, o conceito de \textit{skip connection} é utilizado conforme a Figura \ref{fig:blocodenso}. Um bloco denso $B$ composto por um conjunto de camadas $C = \{c_1, c_2, ..., c_n\}$ onde $c_1$ é a entrada de $c_2$. A primeira diferença é que para as camadas sucessoras, todas as camadas anteriores estarão na entrada, isso é, a entrada de $c_3$ será $\{c_1, c_2\}$, a entrada de $c_4$ será $\{c_1, c_2,c_3\}$ e assim sucessivamente. A segunda diferença é que nos blocos densos as saídas das camadas são unidas por uma concatenação de matrizes, não por soma. Sendo assim, se cada camada do bloco possui uma saída de $x$ matrizes, o bloco possui $n$ camadas e a entrada do bloco possui tamanho $a$, a saída possuirá o tamanho representado pela Equação~\ref{eq:eq8}:
 
@@ -18,7 +20,7 @@ Nas \ac{DenseNet}s, o conceito de \textit{skip connection} é utilizado conforme
 
 Vale mencionar que o valor de $x$ se conserva para toda a rede. Uma vantagem de usar blocos densos é a possibilidade de propagar informações com diversos níveis de abstração ao longo de toda a rede.
 
-As \ac{DenseNet}s seguem um padrão arquitetural muito similar ao das \ac{ResNet}s começando a rede com uma camada de convolução $7\times7$ com \textit{strides} de $2\times2$ que é sucedida por uma camada de \textit{batch normalization} e outra de \ac{ReLU}. Depois disso, têm uma camada de \textit{pooling} máximo e após essa camada, têm quatro blocos densos intercalados por blocos intermediários. Os blocos de convolução dentro dos blocos densos são compostos por uma camada de convolução $1\times1$ (que \citeonline{liu-2017} definem como camada de ``gargalo'') e uma camada de convolução $3\times3$. Vale mencionar que todas as camadas de convolução nos blocos densos são precedidas por uma camada de \textit{batch normalization} e \ac{ReLU}. Os blocos intermediários são compostos por uma camada de convolução $1\times1$ seguida de uma camada de \textit{pooling} pela média (que também é precedida por \textit{batch normalization} e \ac{ReLU}). No final dos 4 blocos densos, a rede possui mais uma camada de \textit{batch normalization} e \ac{ReLU} seguida por um \textit{pooling} pela média global e uma camada completamente conectada que faz a classificação. A Figura \ref{fig:archdensenet} mostra como é a arquitetura da rede.
+As \ac{DenseNet}s seguem um padrão arquitetural muito similar ao das \ac{ResNet}s começando a rede com uma camada de convolução $7\times7$ com \textit{strides} de $2\times2$ que é sucedida por uma camada de \textit{batch normalization} e outra de \ac{ReLU}. Depois disso, têm uma camada de \textit{pooling} pelo máximo e após essa camada, têm quatro blocos densos intercalados por blocos intermediários. Os blocos de convolução dentro dos blocos densos são compostos por uma camada de convolução $1\times1$ (que \citeonline{liu-2017} definem como camada de ``gargalo'') e uma camada de convolução $3\times3$. Vale mencionar que todas as camadas de convolução nos blocos densos são precedidas por uma camada de \textit{batch normalization} e \ac{ReLU}. Os blocos intermediários são compostos por uma camada de convolução $1\times1$ seguida de uma camada de \textit{pooling} pela média (que também é precedida por \textit{batch normalization} e \ac{ReLU}). No final dos 4 blocos densos, a rede possui mais uma camada de \textit{batch normalization} e \ac{ReLU} seguida por um \textit{pooling} pela média global e uma camada completamente conectada que faz a classificação. A Figura \ref{fig:archdensenet} mostra como é a arquitetura da rede.
 
 \begin{figure}[H]
 	% Alterar espaçamentos antes e depois do caption
@@ -43,6 +45,8 @@ O modelo proposto obteve resultados competitivos com os da literatura, ficando e
 
 A abordagem consiste em utilizar a rede VGG16 \cite{simonyan-2014} como arquitetura base, substituir as camadas completamente conectadas fc6 e fc7 por camadas convolucionais, alterar o filtro pool5 de $2 \times 2 - s2$ para $3 \times 3 - s1$, e usaram o algoritmo \textit{à trous}\cite{holschneider-1990} para preencher os espaços vazios. Além disso, eles removeram todas as camadas de \textit{dropout} e a última camada completamente conectada. Por fim, as camadas de convolução geram os resultados de mais de 8000 localizações e classificações, as quais são filtradas em um passo final de supressão de não-máximos, que elimina todos os resultados com confiança abaixo de $0,5$.
 
+A Figura \ref{fig:yoloxssd} mostra as diferenças entre as arquiteturas \ac{YOLO} e \ac{SSD}. Enquanto \citeonline{redmon-2015} usaram uma camada completamente conectada intermediária para fazer a localização dos objetos, \citeonline{wei-2015} usaram camadas de convolução sobre mapas de múltiplos tamanhos. Além disso, o \ac{SSD} trabalha com \textit{bounding-boxes} de tamanhos padrões $\{1, 2, 3, \frac{1}{2}, \frac{1}{3}\}$. Os filtros de convolução adicionais, os tamanhos padrões de \textit{bounding-boxes} e o uso de \textit{data-augmentation} foram cruciais na obtenção dos bons resultados.
+
   \begin{figure}[H]
 	% Alterar espaçamentos antes e depois do caption
 	\setlength{\abovecaptionskip}{0pt}
@@ -57,12 +61,12 @@ A abordagem consiste em utilizar a rede VGG16 \cite{simonyan-2014} como arquitet
 	\label{fig:yoloxssd}
 \end{figure}
 
-A Figura \ref{fig:yoloxssd} mostra as diferenças entre as arquiteturas \ac{YOLO} e \ac{SSD}. Enquanto \citeonline{redmon-2015} usaram uma camada completamente conectada intermediária para fazer a localização dos objetos, \citeonline{wei-2015} usaram camadas de convolução sobre mapas de múltiplos tamanhos. Além disso, o \ac{SSD} trabalha com \textit{bounding-boxes} de tamanhos padrões $\{1, 2, 3, \frac{1}{2}, \frac{1}{3}\}$. Os filtros de convolução adicionais, os tamanhos padrões de \textit{bounding-boxes} e o uso de \textit{data-augmentation} foram cruciais na obtenção dos bons resultados.
-
 \section{DSSD: \textit{Deconvolution Single-Shot Detector}}
 \label{secao:3:3}
 
-\citeonline{cheng-2017} propuseram uma extensão do \ac{SSD}. Depois dos resultados obtidos pelo \ac{SSD} ao fazer localizção e classificação de objetos com uma \ac{mAP} de $79,5\%$, eles propuseram uma abordagem alternativa, usando camadas de deconvolução ao final da rede. As camadas de deconvolução tem entre seus resultados o aumento de resolução do mapa de entrada. A abordagem visou explorar esse efeito com o intuito de aumentar a \ac{mAP} da classificação e localização de objetos, e, com isso, atingir uma \ac{mAP} de $81,5\%$. Embora essa abordagem tenha uma \ac{mAP} maior do que a obtida por \citeonline{wei-2015}, ela não é rápida o bastante pra fazer localização e classificação em tempo real.
+\citeonline{cheng-2017} propuseram uma extensão do \ac{SSD}. Depois dos resultados obtidos pelo \ac{SSD} ao fazer localização e classificação de objetos com uma \ac{mAP} de $79,5\%$, eles propuseram uma abordagem alternativa, usando camadas de deconvolução ao final da rede. As camadas de deconvolução tem entre seus resultados o aumento de resolução do mapa de entrada. A abordagem visou explorar esse efeito com o intuito de aumentar a \ac{mAP} da classificação e localização de objetos, e, com isso, atingir uma \ac{mAP} de $81,5\%$. Embora essa abordagem tenha uma \ac{mAP} maior do que a obtida por \citeonline{wei-2015}, ela não é rápida o bastante pra fazer localização e classificação em tempo real.
+
+A Figura \ref{fig:ssdxdssd} mostra as arquiteturas da \ac{SSD} e \ac{DSSD} mostrando as suas diferenças. É possível visualizar que a rede \ac{DSSD} utiliza as saídas da \ac{SSD} como entrada aos módulos de deconvolução.
 
 
 \begin{figure}[H]
@@ -121,7 +125,7 @@ Como mencionado anteriormente, embora o \ac{DSSD} tenha melhorado a \ac{mAP} do 
 
 Um grande desafio em treinar modelos de \textit{Deep Learning} é a necessidade de um grande volume de dados classificados manualmente. Com essa necessidade, diversos trabalhos foram desenvolvidos com o objetivo de apresentar uma base de dados anotados manualmente para um conjunto de problemas específicos. Nos trabalhos de Localização e classificação, uma das bases mais utilizadas é a \ac{PASCAL VOC}.
 
-O desafio \ac{PASCAL VOC} foi realizado anualmente entre os anos de 2004 e 2012, e a cada ano novas imagens e novos desafios foram propostos na área de visão computacional. Os principais desafios envolviam Localização e Classificação de Objetos, Segmentação Semântica, \textit{layout} humano (um desafio que consiste em detectar partes do corpo como cabeça, mãos e pés) e classificação de ações \cite{everingham-2015}.
+O desafio \ac{PASCAL VOC} foi realizado anualmente entre 2004 e 2012, e a cada ano novas imagens e novos desafios foram propostos na área de visão computacional. Os principais desafios envolviam Localização e Classificação de Objetos, Segmentação Semântica, \textit{layout} humano (um desafio que consiste em detectar partes do corpo como cabeça, mãos e pés) e classificação de ações \cite{everingham-2015}.
 
 O desafio de Localização e Classificação de objetos desde 2007 possui 20 classes distintas de objetos e a cada ano eles criaram uma nova base com mais imagens extraídas da internet. A Tabela \ref{tab:voc2007} mostra as classes, o número de imagens e o número de objetos por classe nos conjuntos de treino, validação e teste.
 
@@ -182,7 +186,7 @@ Analisando a tabela é possível perceber que a base é desbalanceada. A classe 
 \subsection{PASCAL VOC 2012}
 \label{section:3:4:1}
 
-Em 2012 foi lançado uma outra versão da \ac{PASCAL VOC}. Essa edição da competição tinha uma base de dados maior e mais robusta, embora ainda mantivesse as mesmas 20 classes da base de 2007. A tabela \ref{tab:voc2012} mostra a distribuição de imagens e objetos na base \ac{PASCAL VOC} 2012. Nela será possível perceber o mesmo desbalanceamento encontrado na base de 2007. Porém, uma vantagem é que ela tem mais imagens, se comparada à base de 2007. Além disso, como as bases são completamente distintas, podem ser usadas em conjunto para o treinamento e a validação dos modelos.
+Em 2012 foi lançado uma outra versão da \ac{PASCAL VOC}. Essa edição da competição tinha uma base de dados maior e mais robusta, embora ainda mantivesse as mesmas 20 classes da base de 2007. A Tabela \ref{tab:voc2012} mostra a distribuição de imagens e objetos na base \ac{PASCAL VOC} 2012. Nela será possível perceber o mesmo desbalanceamento encontrado na base de 2007. Porém, uma vantagem é que ela tem mais imagens, se comparada à base de 2007. Além disso, como as bases são completamente distintas, podem ser usadas em conjunto para o treinamento e a validação dos modelos.
 
 \begin{table}[H]
 	\centering
@@ -240,7 +244,7 @@ Ao passo que a revocação $R$ pode ser definida pela Equação \ref{eq:eq10}.
 	R = \dfrac{TP}{TP+FN}
 \end{equation}
 
-Uma vez que se tenha os valores de precisão e revocação, é traçada a curva $P \times R$. Essa curva se comporta com $R$ Aumentando a medida que aumentam os falsos negativos e com $P$ oscilando e fazendo ``zigue-zague''. O valor teórico da Precisão média é determinado pela área sobre a curva $P \times R$ como está descrito na Equação \ref{eq:eq11}.
+Uma vez que se tenha os valores de precisão e revocação, é traçada a curva $P \times R$. Essa curva se comporta com $R$ aumentando a medida que aumentam os falsos negativos e com $P$ oscilando e fazendo ``zigue-zague''. O valor teórico da Precisão média é determinado pela área sobre a curva $P \times R$ como está descrito na Equação \ref{eq:eq11}.
 
 \begin{equation}
 	\label{eq:eq11}
