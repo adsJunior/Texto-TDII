@@ -5,68 +5,94 @@
 % Diminuir espaçamento entre título e texto
 \vspace{-1.9cm}
 
+Neste capítulo serão descritas a metodologia, o ambiente de testes e as tecnologias usadas no desenvolvimento do trabalho.
 
 \section{Metodologia}
-\label{secao:4:1}
+\label{sec:4:1}
 
-A seguir, serão definidos os passos necessários para a elaboração do trabalho proposto.
+Nesta seção será descrita a metodologia necessária para o desenvolvimento do trabalho.
 
-\subsection{Levantamento Bibliográfico}
-\label{subsecao:4:1:1}
+\subsection{Levantamento Bibliográfica}
+\label{sec:4:1:1}
 
-Nesta fase será feito um levantamento na literatura de tudo o que é julgado necessário para realizar o trabalho proposto. Será feito um estudo para compreensão da arquitetura \ac{DenseNet} \cite{liu-2017}. Além disso, serão feitos estudos com métodos da literatura como \ac{YOLO} \cite{redmon-2015}, \ac{SSD} \cite{wei-2015} e \ac{DSSD} \cite{cheng-2017}. Serão feitos também estudos para analisar o conteúdo da base de dados para testes. A base utilizada será a \ac{PASCAL VOC} \cite{everingham-2015}. Além disso, nessa etapa serão levantadas as formas de avaliar os resultados dos algoritmos.
+Nessa etapa foi feita um levantamento bibliográfico. O objetivo é entender como funciona na teoria e na prática os algoritmos de localização e classificação de objetos. Além disso, o levantamento também serviu para definir a base de dados a ser utilizada no trabalho, a arquitetura de redes neurais convolutivas a ser implementada, a abordagem utilizada para fazer a localização e classificação de objetos e a métrica utilizada para avaliar o trabalho.
 
-\subsection{Testes e avaliações com métodos da literatura}
-\label{subsecao:4:1:2}
+A arquitetura base selecionada foi a \ac{DenseNet}121, as bases de imagens selecionadas foram as versões de 2007 e 2012 da \ac{PASCAL VOC}. A abordagem selecionada para fazer a localização e classificação envolve elementos da \ac{SSD} \cite{wei-2015} e da \ac{DSSD} \cite{cheng-2017}. Por fim, a métrica utilizada é a \ac{mAP} conforme definida na Seção \ref{section:3:4:2}.
 
-Nesta etapa serão feitos os testes com os métodos já implementados na literatura. O objetivo é compreender o funcionamento, levantar os principais obstáculos nas respectivas implementações e selecionar as melhores tecnologias para a realização do projeto proposto. Nesta etapa também serão testados os algoritmos para avaliar os resultados obtidos, propostos por \citeonline{everingham-2015} e por \citeonline{lin-2014}.
+\subsection{Implementação e treinamento}
+\label{sec:4:1:2}
 
-\subsection{Desenvolvimento do protótipo inicial}
-\label{subsecao:4:1:3}
+Nesta fase foi feita a implementação da \ac{DenseNet}121 com as modificações propostas por \citeonline{wei-2015} e \citeonline{cheng-2017} para fazer a localização e classificação dos objetos. Feita a implementação da \ac{DenseNet} e das modificações, o modelo foi treinado usando a base de dados \ac{PASCAL VOC} nas versões 2007 e 2012. Mais detalhes das modificações feitas na arquitetura e do treinamento podem ser encontradas na Seção \ref{sec:4:3}.
 
-A proposta é desenvolver um protótipo inicial usando a arquitetura da \ac{DenseNet} 121 apresentada por \citeonline{liu-2017} com alterações. As alterações a ser feitas são a remoção da camada final de classificação e a inserção de camadas intermediárias de convolução para realizar a localização dos objetos em diferentes escalas, como apresentado por \citeonline{wei-2015}. Além disso, serão aplicadas as mesmas modificações aplicadas inicialmente na \ac{ResNet} 101 para gerar o primeiro modelo proposto por \cite{cheng-2017}.
+\subsection{Testes e Avaliação}
+\label{sec:4:1:3}
 
-\subsection{Desenvolvimento da arquitetura final usando deconvolução}
-\label{subsecao:4:1:4}
+Nesta fase foram feitos os testes com o modelo proposto. Eles foram feitos usando o subconjunto de testes da \ac{PASCAL VOC} 2012. Após os testes, foi feita a avaliação dos resultados do modelo com a métrica proposta (\ac{mAP}). Em cima dos resultados obtidos foi feita uma comparação com os principais trabalhos relacionados na literatura \cite{wei-2015, cheng-2017} com o intuito de apontar as principais falhas e os principais ganhos do modelo proposto.
 
-%Depois de alterar a arquitetura para fazer a detecção em múltiplas escalas usando convolução, será feita uma nova modificação da arquitetura, acrescentando camadas de deconvolução. Para cada camada de deconvolução é acrescentado um módulo de predição, que fará a localização e a classificação dos objetos. O acréscimo das camadas de deconvolução e dos novos módulos de predição seguem o modelo proposto por \citeonline{cheng-2017}.
+Além disso, foram feitas algumas demonstrações com o intuito de gerar imagens para se fazer uma avaliação qualitativa dos resultados obtidos pelo modelo. Por fim, foi escrita uma monografia contendo todo o conteúdo dos estudos realizados, das implementações feitas e dos resultados obtidos. O Capítulo \ref{cap:5} apresenta de forma mais detalhada os resultados obtidos nos experimentos feitos.
 
-\subsection{Avaliação dos resultados e comparação com o Estado da Arte}
-\label{subsecao:4:1:5}
+\section{Ambiente de teste}
+\label{sec:4:2}
 
-Por fim, erá feita a avaliação dos resultados dos métodos propostos e a comparação dos mesmos com os resultados do estado da arte. Essas avaliações serão feitas com base nas métricas que serão apresentadas na Sub-seção \ref{subsecao:4:1:1}. O objetivo é dizer o quão efetivo foi a utilização de uma arquitetura de \ac{CNN} mais moderna e avançada com métodos já conhecidos na resolução do problema de localzação e classificação.
+Todo o código foi implementado usando as seguintes tecnologias:
 
- % \subsection{Monografia}
-% \label{subsecao:4:1:6}
+\begin{itemize}
+	\item Python 3.5.2;
+	\item TensorFlow 1.8.0;
+	\item Keras 2.2.4;
+	\item Jupyter 2.1.2;
+	\item Notebook 6.0.3.
+\end{itemize}
 
-% Por fim será confeccionado uma monografia apresentando e descrevendo a implementação do método proposto, os resultados obtidos, uma avaliação dos resultados e uma comparação com o estado da arte.
+Os experimentos foram realizados no computador com as seguintes configurações:
 
-% \section{Cronograma}
-% \label{secao:4:2}
+\begin{itemize}
+	\item \textbf{Sistema Operacional:} Ubuntu 18.04 LTS;
+	\item \textbf{CPU:} Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz (6 núcleos, duas \textit{threads} por núcleo);
+	\item \textbf{Memória RAM:} 32GB;
+	\item \textbf{GPU:} NVidia GTX 1080.
+\end{itemize}
 
-% O projeto será desenvolvido ao longo do ano 2019 seguindo o cronograma apresentado na Tabela \ref{tab:tabela1}. O período está dividido em bimestres, sendo o primeiro bimestre equivalente aos meses de janeiro e fevereiro de 2019, e assim sucessivamente.
+\section{Implementação e treinamento}
+\label{sec:4:3}
 
-% \begin{table}[H]
-%	\centering
-	% 	\vspace{-0.3cm} % espaço entre titulo e tabela
-%	\caption[Cronograma de desenvolvimento]{Cronograma de desenvolvimento do projeto}
-%	\label{tab:tabela1}
-%	\begin{tabular}{|c|c|c|c|c|c|c|}
-%		\hline
-%		\multirow{2}{*}{Atividades}            & \multicolumn{6}{c|}{Bimestre} \\ \cline{2-7} 
-%		& 1   & 2   & 3  & 4  & 5  & 6  \\ \hline
-%		Levantamento Bibliográfico             & x   & x   & x  &    &    &    \\ \hline
-%		Testes com métodos da literatura       &     &     & x  & x  &    &    \\ \hline
-%		Desenvolvimento da arquitetura inicial &     &     & x  & x  &    &    \\ \hline
-%		Desenvolvimento da arquitetura final   &     &     &    & x  & x  &    \\ \hline
-%		Avaliação dos resultados               &     &     &    &    & x  & x  \\ \hline
-%		Elaborar Monografia                    &     &     &    &    & x  & x  \\ \hline
-%	\end{tabular}
-%	\vspace{0.1cm} 
-%	{\footnotesize\\ \textbf{Fonte: Elaborado pelo autor}}
-%\end{table}
+Nesta seção será descrita de forma mais detalhada a implementação das modificações na arquitetura da rede neural, e o treinamento.
 
 
-% Usar espaço para descrever base de testes, método de avaliação e fluxograma.
+\subsection{Modificação da Arquitetura}
+\label{secao:4:3:1}
+
+A implementação consiste em adaptar a \ac{DenseNet} 121 para realizar as tarefas de localização e classificação. Nesse estágio foi feita uma pequena alteração com relação aos modelos propostos por \citeonline{wei-2015} e por \citeonline{cheng-2017}. Enquanto que \citeonline{wei-2015} usou imagens de tamanho $300 \times 300$ e \citeonline{cheng-2017} usou imagens de tamanho $321\times 321$, foi usado nesse trabalho imagens de $311 \times 311$.
+
+O motivo é que, embora a \ac{DenseNet} possua as mesmas características de \textit{downsample} (por meio de convolução ou \textit{pooling}) que a \ac{ResNet}, a implementação da \ac{SSD} por \citeonline{cheng-2017} usa \textit{padding} válido para todas as camadas de \textit{downsample}. Isso faz com que, caso o tamanho de saída da camada de \textit{downsample} não seja inteiro, uma parte seja cortada, podendo causar perda de informação. Sendo assim, foi feita a opção por uma imagem com tamanho menor e o uso de \textit{padding} equivalente, de forma a evitar o corte.
+
+Além dessas modificações, é necessário mudar algumas coisas na arquitetura da rede \ac{DenseNet}121. A primeira delas é que a SSD utiliza ramificações de diferentes níveis para fazer as predições de forma mais precisa. Sendo assim, a primeira alteração é que no segundo bloco de transição é criada uma ramificação fazendo regularização L2. Além disso, a camada de \textit{pooling} do último bloco de transição é substituída por um bloco $3\times3$ com strides igual a 1. No final da rede as camadas de \textit{pooling} global e softmax são removidas e essa saída é a segunda ramificação da \ac{SSD}. Depois disso, são adicionados mais dois blocos com camadas de convolução, uma $1\times1$ seguida de um $3\times3$ com \textit{stride} 2. Por fim, mais dois blocos, com as mesmas camadas, porém, as camadas $3\times3$ com \textit{stride} igual a 1. A Figura \ref{fig:dense_ssd} mostra a nova arquitetura da rede. Os blocos brancos representam as partes da implementação original da \ac{DenseNet}121, os blocos azuis representam as modificações propostas por \citeonline{wei-2015} e os blocos laranjados representam as modificações propostas por \citeonline{cheng-2017}.
+
+\begin{figure}[H]
+	% Alterar espaçamentos antes e depois do caption
+	\setlength{\abovecaptionskip}{0pt}
+	\setlength{\belowcaptionskip}{0pt}
+	% Caption
+	\caption[Arquitetura proposta]{Arquitetura com modificações propostas para a \ac{DenseNet}}
+	\centering
+	\includegraphics[width=.6\textwidth]{imagem/0x_densenet_classloc.jpg}
+	% Caption centralizada
+	\captionsetup{justification=centering}
+	\captionfont{\small{\textbf{\\Fonte: Elaborado pelo autor.}}}	
+	\label{fig:dense_ssd}
+\end{figure}
 
 
+\subsection{Treinamento}
+\label{secao:4:3:2}
+
+A rede foi inicializada com os pesos da \ac{DenseNet}121 treinada na ImageNet, e as camadas adicionais foram inicializadas com o método \textit{He normal} proposto por \citeonline{he-2015}. O algoritmo de treinamento selecionado foi o Adam, proposto por \citeonline{kingma-2014} com os seguintes hiperparâmetros:
+
+\begin{itemize}
+	\item $\alpha = 5\times10^{-5}$;
+	\item $\beta_1 = 0,9$;
+	\item $\beta_2 = 0,999$;
+	\item $\epsilon = 1\times10^{-8}$.
+\end{itemize}
+
+Além disso, o treinamento ocorreu em um total de 400 épocas, cada época com 1000 iterações e cada iteração com um lote de processamento de 12 imagens. Após 200 épocas de treinamento, a taxa de aprendizado caiu para $5\times10^{-6}$ e após mais 100 épocas, caiu para $5\times10^{-7}$. As bases de dados usadas para os testes foram a \ac{PASCAL VOC} 2007 e 2012. Para treinamento foram usadas as imagens do conjunto de treino e validação de ambas as bases, e para validação do treinamento foi utilizada a base de testes de 2007. Os testes foram feitos na base de 2012.

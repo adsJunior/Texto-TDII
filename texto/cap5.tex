@@ -1,37 +1,18 @@
 % Nome do capítulo
-\chapter{Experimentos}
+\chapter{Resultados}
 % Label para referenciar
 \label{cap:5}
 % Diminuir espaçamento entre título e texto
 \vspace{-1.9cm}
 
-\section{SSD}
-\label{secao:5:1}
+Neste capítulo serão feitas as avaliações qualitativas e quantitativas do modelo proposto, além de uma comparação com o Estado da Arte.
 
-A primeira implementação consiste em adaptar a \ac{DenseNet} 121 para realizar as tarefas de localização e classificação. Nesse estágio foi feita uma pequena alteração com relação aos modelos propostos por \citeonline{wei-2015} e por \citeonline{cheng-2017}. Enquanto que \citeonline{wei-2015} usou imagens de tamanho $300 \times 300$ e \citeonline{cheng-2017} usou imagens de tamanho $321\times 321$, foi usado nesse trabalho imagens de $311 \times 311$.
-
-O motivo é que, embora a \ac{DenseNet} possua as mesmas características de \textit{downsample} (por meio de convolução ou \textit{pooling}) que a \ac{ResNet}, a implementação da \ac{SSD} por \citeonline{cheng-2017} usa \textit{padding} válido para todas as camadas de \textit{downsample}. Isso faz com que, caso o tamanho de saída da camada de \textit{downsample} não seja inteiro, uma parte seja cortada, podendo causar perda de informação. Sendo assim, foi feita a opção por uma imagem com tamanho menor e o uso de \textit{padding} equivalente, de forma a evitar o corte.
-
-Além dessas modificações, é necessário mudar algumas coisas na arquitetura da rede \ac{DenseNet}121. A primeira delas é que a SSD utiliza ramificações de diferentes níveis para fazer as predições de forma mais precisa. Sendo assim, a primeira alteração é que no segundo bloco de transição é criada uma ramificação fazendo regularização L2. Além disso, a camada de \textit{pooling} do último bloco de transição é substituída por um bloco $3\times3$ com strides igual a 1. No final da rede as camadas de \textit{pooling} global e softmax são removidas e essa saída é a segunda ramificação da \ac{SSD}. Depois disso, são adicionados mais dois blocos com camadas de convolução, uma $1\times1$ seguida de um $3\times3$ com \textit{stride} 2. Por fim, mais dois blocos, com as mesmas camadas, porém, as camadas $3\times3$ com \textit{stride} igual a 1.
-
-\subsection{Treinamento}
-\label{secao:5:1:1}
-
-A rede foi inicializada com os pesos da \ac{DenseNet}121 treinada na ImageNet, e as camadas adicionais foram inicializadas com o método \textit{He normal} proposto por \citeonline{he-2015}. O algoritmo de treinamento selecionado foi o Adam, proposto por \citeonline{kingma-2014} com os seguintes hiperparâmetros:
-
-\begin{itemize}
-	\item $\alpha = 5\times10^{-5}$;
-	\item $\beta_1 = 0,9$;
-	\item $\beta_2 = 0,999$;
-	\item $\epsilon = 1\times10^{-8}$.
-\end{itemize}
-
-Além disso, o treinamento ocorreu em um total de 400 épocas, cada época com 1000 iterações e cada iteração com um lote de processamento de 12 imagens. Após 200 épocas de treinamento, a taxa de aprendizado caiu para $5\times10^{-6}$ e após mais 100 épocas, caiu para $5\times10^{-7}$. As bases de dados usadas para os testes foram a \ac{PASCAL VOC} 2007 e 2012. Para treinamento foram usadas as imagens do conjunto de treino e validação de ambas as bases, e para validação do treinamento foi utilizada a base de testes de 2007. Os testes serão feitos na base de 2012.
-
-\subsection{Avaliação Qualitativa}
+\section{Avaliação Qualitativa}
 \label{secao:5:1:2}
 
 Depois do treinamento, foram feitos alguns experimentos com imagens aleatórias do conjunto separado para validação para avaliar os resultados obtidos pelo método. Embora o método consiga fazer a detecção e a classificação dos objetos, foram percebidas algumas dificuldades.
+
+Na Figura \ref{fig:teste_1} o modelo detectou a pessoa sentada na cadeira e a cadeira no fundo, porém não detectou o cão deitado no chão. Isso pode refletir um pouco de dificuldade em perceber objetos menores ou que não estejam tão centralizados. Além disso, Embora a pessoa sentada esteja bem nítida na imagem, o modelo não conseguiu ter 100\% de confiança que era uma pessoa, o que mostra um certo nível de incerteza na predição.
 
 \begin{figure}[H]
 	% Alterar espaçamentos antes e depois do caption
@@ -47,7 +28,7 @@ Depois do treinamento, foram feitos alguns experimentos com imagens aleatórias 
 	\label{fig:teste_1}
 \end{figure}
 
-Na Figura \ref{fig:teste_1} o modelo detectou a pessoa sentada na cadeira e a cadeira no fundo, porém não detectou o cão deitado no chão. Isso pode refletir um pouco de dificuldade em perceber objetos menores ou que não estejam tão centralizados. Além disso, Embora a pessoa sentada esteja bem nítida na imagem, o modelo não conseguiu ter 100\% de confiança que era uma pessoa.
+Na Figura \ref{fig:teste_2} percebemos mais uma vez o problema da confiança baixa. Além disso, a \textit{bounding box} do cão de trás esta pegando apenas a cabeça, sendo que outras partes do corpo dele estão expostas (ainda que sobrepostas parcialmente).
 
 \begin{figure}[H]
 	% Alterar espaçamentos antes e depois do caption
@@ -63,8 +44,7 @@ Na Figura \ref{fig:teste_1} o modelo detectou a pessoa sentada na cadeira e a ca
 	\label{fig:teste_2}
 \end{figure}
 
-Na Figura \ref{fig:teste_2} percebemos mais uma vez o problema da confiança baixa. Além disso, a \textit{bounding box} do cão de trás esta pegando apenas a cabeça, sendo que outras partes do corpo dele estão expostas (ainda que sobrepostas parcialmente).
-
+Na Figura \ref{fig:teste_3}, mostra mais uma vez uma nítida dificuldade do modelo em perceber objetos mais distantes. A imagem possui 9 objetos delimitados no \textit{ground-truth} e o modelo conseguiu detectar apenas 2. Ele não consegue perceber nem a mesa de jantar e nem as pessoas mais ao fundo. Além disso, as duas pessoas que estão em pé no canto direito da Figura foram percebidas como apenas uma pelo modelo.
 
 \begin{figure}[H]
 	% Alterar espaçamentos antes e depois do caption
@@ -80,8 +60,7 @@ Na Figura \ref{fig:teste_2} percebemos mais uma vez o problema da confiança bai
 	\label{fig:teste_3}
 \end{figure}
 
-Na Figura \ref{fig:teste_3}, mostra mais uma vez uma nítida dificuldade do modelo em perceber objetos mais distantes. A imagem possui 9 objetos delimitados no \textit{ground-truth} e o modelo conseguiu detectar apenas 2. Ele não consegue perceber nem a mesa de jantar e nem as pessoas mais ao fundo. Além disso, as duas pessoas que estão em pé no canto direito da Figura foram percebidas como apenas uma pelo modelo.
-
+A Figura \ref{fig:teste_4} é bem simples e o único objeto presente está bem nítido, então o modelo consegue percebê-lo com a confiança de 100\%.
 
 \begin{figure}[H]
 	% Alterar espaçamentos antes e depois do caption
@@ -97,7 +76,7 @@ Na Figura \ref{fig:teste_3}, mostra mais uma vez uma nítida dificuldade do mode
 	\label{fig:teste_4}
 \end{figure}
 
-A Figura \ref{fig:teste_4} é bem simples e o único objeto presente está bem nítido, então o modelo consegue percebê-lo com a confiança de 100\%.
+Já a Figura \ref{fig:teste_5} mostra um fenômeno diferente: além de detectar o único objeto presente no \textit{ground-truth} com a confiança alta, ele também detecta uma outra instância do mesmo objeto ao fundo. Isso significa que embora o modelo tenha um pouco de dificuldade com objetos que não estão em destaque, essa dificuldade não é tão crítica e existe uma certa robustês.
 
 \begin{figure}[H]
 	% Alterar espaçamentos antes e depois do caption
@@ -113,9 +92,7 @@ A Figura \ref{fig:teste_4} é bem simples e o único objeto presente está bem n
 	\label{fig:teste_5}
 \end{figure}
 
-Já a Figura \ref{fig:teste_5} mostra um fenômeno diferente: além de detectar o único objeto presente no \textit{ground-truth} com a confiança alta, ele também detecta uma outra instância do mesmo objeto ao fundo. Isso significa que embora o modelo tenha um pouco de dificuldade com objetos que não estão em destaque, essa dificuldade não é tão crítica e existe uma certa robustês.
-
-\subsection{Avaliação Quantitativa}
+\section{Avaliação Quantitativa}
 \label{secao:5:1:3}
 
 Depois dos experimentos, foram feitos os testes para avaliar de forma numérica os resultados do modelo e comparar com o estado da arte. O resultado final apontou um \ac{mAP} de 72,6\%. 
@@ -161,11 +138,11 @@ Depois dos experimentos, foram feitos os testes para avaliar de forma numérica 
   \end{table}
 
 % Fazer analise comparativa com os resultados.
-Com base na Tabela \ref{tab:resultados} podemos ver que os resultados estão um pouco abaixo dos obtidos por \citeonline{wei-2015} e \citeonline{cheng-2017}. Apesar disso, pode-se observar que o modelo se saiu muito bem em algumas classes como Avião, Carro, Motocicleta, Cavalo e bicicleta, chegando a ter resultados melhores que os outros modelos em algumas delas.
+Com base na Tabela \ref{tab:resultados} é possível ver que os resultados estão um pouco abaixo dos obtidos por \citeonline{wei-2015} e \citeonline{cheng-2017}. Apesar disso, pode-se observar que o modelo se saiu muito bem em algumas classes como Avião, Carro, Motocicleta, Cavalo e bicicleta, chegando a ter resultados melhores que os outros modelos em algumas delas.
 
-A principal dificuldade está nos objetos mais difíceis, onde o modelo não conseguiu se ajustar bem, e acabou apresentando resultados muito inferiores aos obtidos pelos outros métodos. Entre essas classes, podemos destacar o vaso de planta, a cadeira, e a Garrafa. Algumas dessas classes o modelo perde por uma discrepância de mais de 10 pontos percentuais.
+A principal dificuldade está nos objetos mais difíceis, onde o modelo não conseguiu se ajustar bem, e acabou apresentando resultados muito inferiores aos obtidos pelos outros métodos. Entre essas classes, é possível destacar o vaso de planta, a cadeira, e a Garrafa. Algumas dessas classes o modelo perde por uma discrepância de mais de 10 pontos percentuais.
 
-A diferença nos resultados se deve a alguns fatores. Entre eles podemos citar o tamanho do lote de treinamento. Enquanto o nosso modelo foi treinado com 12 imagens por lote, os modelos de \citeonline{wei-2015} e \citeonline{cheng-2017} foram treinados usando um lote de 32 imagens. 
+A diferença nos resultados se deve a alguns fatores. Entre eles é possível citar o tamanho do lote de treinamento. Enquanto o modelo proposto foi treinado com 12 imagens por lote, os modelos de \citeonline{wei-2015} e \citeonline{cheng-2017} foram treinados usando um lote de 32 imagens. 
 
 Além disso, devido ao número menor no lote de treinamento, foi necessário aumentar o número de épocas e iterações para garantir a convergência. O aumento de iterações com lotes menores pode causar um \textit{Overfitting} que é quando o modelo aprende os dados específicos ao invés de aprender a generalizar com base nos dados.
 
