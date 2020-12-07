@@ -8,11 +8,41 @@ Neste capítulo serão apresentados os trabalhos na literatura que possuem rela�
 \section{DenseNet}
 \label{secao:3:1}
 
-Como mencionado anteriormente, desde 2012 as tarefas de classificação de imagens são resolvidas majoritariamente por arquiteturas de \textit{Deep Learning}. \citeonline{he-2016} propuseram uma nova arquitetura que utilizava o conceito de \textit{skip connection}, que, como explicado anteriormente, consiste em utilizar a saída de uma camada em camadas posteriores além da próxima. O conceito de \textit{skip connection} fez tanto sucesso que tornou a ser utilizado em um modelo mais recente. \citeonline{liu-2017} propuseram um modelo de \ac{CNN} que utiliza esse mesmo conceito, porém de uma forma um pouco diferente. 
+Como mencionado anteriormente, desde 2012 as tarefas de classificação de imagens são resolvidas majoritariamente por arquiteturas de \textit{Deep Learning}. Em \citeyear{he-2016}, \citeauthor{he-2016} propuseram a \ac{ResNet} que introduziam o conceito de \textit{skip connection}. Uma \textit{skip connection} é quando a camada $C_n$ além de se conectar com a camada $C_{n+1}$ ela se conecta com outra mais a frente - no caso da \textit{\ac{ResNet}}, a camada $C_{n+3}$. Sendo assim, a camada $C_{n+3}$ recebe em suas entradas uma junção das saídas de $C_{n}$ e $C_{n+2}$. Essa combinação de entradas na \ac{ResNet} foi feita como uma soma de matrizes. A Figura \ref{fig:blocoresidual} mostra um exemplo de \textit{skip connection} na \textit{\ac{ResNet}}.
 
-Nas \ac{ResNet}s, existem os blocos residuais, conforme a Figura \ref{fig:blocoresidual}. No bloco residual temos duas camadas $c_1$ e $c_2$ onde $c_1$ é a entrada de $c_2$. Na saída deste bloco residual será feita uma soma de matrizes entre a saída de $c_2$ e a entrada de $c_1$ e essa soma será usada na entrada das camadas posteriores. 
+\begin{figure}[H]
+	% Alterar espaçamentos antes e depois do caption
+	\setlength{\abovecaptionskip}{0pt}
+	\setlength{\belowcaptionskip}{0pt}
+	% Caption
+	\caption[Exemplo de bloco residual]{Exemplo de bloco residual}
+	\centering
+	\includegraphics[width=.5\textwidth]{imagem/0x_resnet_arch.jpg}
+	% Caption centralizada
+	\captionsetup{justification=centering}
+	\captionfont{\small{\textbf{\\Fonte: \citeonline{he-2016}.}}}	
+	\label{fig:blocoresidual}
+\end{figure}
 
-Nas \ac{DenseNet}s, o conceito de \textit{skip connection} é utilizado conforme a Figura \ref{fig:blocodenso}. Um bloco denso $B$ composto por um conjunto de camadas $C = \{c_1, c_2, ..., c_n\}$ onde $c_1$ é a entrada de $c_2$. A primeira diferença é que para as camadas sucessoras, todas as camadas anteriores estarão na entrada, isso é, a entrada de $c_3$ será $\{c_1, c_2\}$, a entrada de $c_4$ será $\{c_1, c_2,c_3\}$ e assim sucessivamente. A segunda diferença é que nos blocos densos as saídas das camadas são unidas por uma concatenação de matrizes, não por soma. Sendo assim, se cada camada do bloco possui uma saída de $x$ matrizes, o bloco possui $n$ camadas e a entrada do bloco possui tamanho $a$, a saída possuirá o tamanho representado pela Equação~\ref{eq:eq8}:
+Seguindo a mesma ideia de \textit{skip connection} proposta por \citeonline{he-2016}, \citeonline{liu-2017} propuseram a \ac{DenseNet}. Nessa nova arquitetura houveram duas mudanças com relação à \ac{ResNet}. A primeira mudança é que as saídas das camadas não seriam mais somadas, mas sim concatenadas, ou empilhadas. A segunda é que em um bloco residual as camadas se conectam com todas as suas sucessoras. 
+
+A Figura \ref{fig:blocodenso} mostra como se conectam as camadas na \ac{DenseNet}. Supondo que temos um bloco denso $B$ com um conjunto de 5 camadas $C = \{c_1, c_2, c_3, c_4, c_5\}$. Como explicado no parágrafo anterior, a saída das camadas serão utilizadas em todas as camadas subsequentes no mesmo bloco. Sendo assim, a entrada de $c_3$ será composta pelas saídas de $c_1$ e $c_2$ concatenadas, e assim sucessivamente. Além disso, como as saídas são concatenadas e não somadas, a tendência é que as entradas cresçam a medida que a rede se aprofunda. O conceito de bloco denso permite propagar múltiplos níveis de abstração ao longo de toda a rede, melhorando assim os resultados obtidos \cite{liu-2017}.
+
+\begin{figure}[H]
+	% Alterar espaçamentos antes e depois do caption
+	\setlength{\abovecaptionskip}{0pt}
+	\setlength{\belowcaptionskip}{0pt}
+	% Caption
+	\caption[Exemplo de bloco denso]{Exemplo de bloco denso}
+	\centering
+	\includegraphics[width=.5\textwidth]{imagem/0x_densenet_block.jpg}
+	% Caption centralizada
+	\captionsetup{justification=centering}
+	\captionfont{\small{\textbf{\\Fonte: \citeonline{liu-2017}.}}}	
+	\label{fig:blocodenso}
+\end{figure} 
+
+Sendo assim, se cada camada do bloco possui uma saída de $x$ matrizes, o bloco possui $n$ camadas e a entrada do bloco possui tamanho $a$, a saída possuirá o tamanho representado pela Equação~\ref{eq:eq8}:
 
 \begin{equation}
 	\label{eq:eq8}	y = n x + a

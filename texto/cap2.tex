@@ -94,7 +94,7 @@ Y=\Big(\sum_{i=1}^{n}{(W_i \times X_i)}\Big) - B
 Uma rede percepron não é uma arquitetura de redes neurais artificiais muito poderosa, mas deu base para outras arquiteturas mais robustas. A principal delas é o \textit{Perceptron} Multi-Camadas.
 
 \subsection{\textit{Multi-Layer Perceptron}}
-\label{subsecao:2:2:2}
+\label{subsecao:2:2:1}
 
 
 As redes \textit{Perceptron} Multicamadas ou \ac{MLP} são baseadas nos \textit{Perceptron}s simples, como mencionado anteriormente. A diferença, porém, é que elas trabalham com mais camadas do que simplesmente as camadas de entrada e saída. Geralmente elas possuem uma ou duas camadas intermediárias às camadas externas. Essas camadas intermediárias, também são chamadas de camadas ocultas e servem para conferir uma robustez maior ao método.
@@ -134,6 +134,12 @@ As \ac{CNN} são um modelo específico de \textit{Deep Learning} muito utilizado
 Ao contrário das \ac{RNA}s tradicionais (como \ac{MLP}), as \ac{CNN}s não necessariamente ligam todos os neurônios na camada de origem a todos os neurônios da camada de destino. \citeonline{ferreira-2017} define que existem três tipos comuns de camadas utilizadas nas redes neurais convolucionais: as camadas de convolução, camadas de \textit{pooling} e camadas completamente conexas.
 
 A ideia da camada de convolução é de que cada neurônio recebe como entrada neurônios próximos e tem por objetivo criar mapas e filtros. \citeonline{ferreira-2017} define que em aplicações de reconhecimento de objetos, por exemplo, é comum as primeiras camadas de convolução detectarem bordas ou manchas que seriam as características mais básicas da imagem. As camadas de convolução mais profundas detectam outras características mais específicas.
+
+Uma camada de convolução possui alguns atributos essenciais. O primeiro deles, é o tamanho do filtro. Nas principais \ac{CNN}s os filtros geralmente são $1 \times 1$ ou $3 \times 3$, porém algumas redes podem possuir filtros maiores como $5 \times 5$ ou $7 \times 7$. O segundo parâmetro é o \textit{stride} que define o tamanho do salto que será feito pelo filtro durante as operações de convolução. No processamento digital de imagens normalmente esse salto é de um \textit{pixel}, porém, nas \ac{CNN}s pode ser vantajoso dar saltos maiores. 
+
+O último parâmetro é o \textit{padding}. O \textit{padding} consistem em preencher os cantos da imagem com zeros, de forma a aumentar o tamanho da imagem sem alterar o seu conteúdo. Esse preenchimento pode ser feito por duas razões principais: a primeira delas é porque as operações de convolução reduzem o tamanho da imagem e a principal forma de evitar essa redução de tamanho é o uso de \textit{padding}; a segunda razão também tem a ver com a redução de tamanho. Algumas vezes, é necessário reduzir o tamanho dos mapas em uma rede convolutiva, e neste sentido, as camadas de convolução (ou de \textit{pooling}) atuam fazendo o \textit{downsample} - ou redução de amostragem. Mas, em alguns casos o tamanho da saída não será um valor inteiro, sendo necessária uma correção. Essa correção pode ser feita via corte - quando uma ou mais linhas ou colunas são cortadas durante a convolução - ou por preenchimento, quando uma ou mais linhas ou colunas de zeros são acrescentadas. O corte e o preenchimento são chamados respectivamente de \textit{padding} válido e \textit{padding} equivalente. 
+
+Sempre ligada a uma camada de convolução, é comum ter uma camada com função de ativação. Essas camadas geralmente usam as mesmas funções descritas na Seção \ref{subsecao:2:2:1}.
 
 As camadas de \textit{pooling} são utilizadas para reduzir a dimensão de dados vindo das camadas de convolução, consequentemente reduzindo o custo computacional \cite{ferreira-2017}. Na prática elas funcionam como as camadas de convolução, mas ao invés de fazer a operação tradicional de convolução, elas reduzem um conjunto de elementos a um único representante com base em uma função específica. As funções mais utilizadas são máximo e média \cite{ferreira-2017}.
 
