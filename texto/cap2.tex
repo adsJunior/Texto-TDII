@@ -145,6 +145,13 @@ As camadas de \textit{pooling} são utilizadas para reduzir a dimensão de dados
 
 Por fim, as camadas completamente conexas são exatamente iguais às redes MLP e é comum utilizá-las no final da rede para conectar à saída. Seu acréscimo no final é importante pois faz a ligação de todos os filtros \cite{ferreira-2017}. As arquiteturas de \ac{CNN}s geralmente intercalam algumas camadas de convolução com uma camada de \textit{pooling}. As arquiteturas mais antigas costumavam adicionar camadas completamente conexas ao final, porém, os modelos mais novos, como a \ac{ResNet} e a \ac{DenseNet} já não usam mais esse conceito.
 
+As Redes Neurais Covolucionais têm se tornado cada vez mais populares em tarefas relacionadas a processamento digital de imagens devido aos resultados que têm alcançado. A primeira \ac{CNN} usada para a tarefa de classificação de imagens foi a AlexNet proposta por \citeonline{krizhevsky-2012}. Essa rede venceu o \ac{ILSVRC} de 2012. Desde então, várias arquiteturas vêm alcançando resultados cada vez mais expressivos nessa área, como a VGG \cite{simonyan-2014}, Inception \cite{szegedy-2015}, \ac{ResNet} \cite{he-2016}, \ac{DenseNet} \cite{liu-2017}, etc..
+
+Uma outra área impactada pelo uso das \ac{CNN}s é a área de segmentação semântica. \citeonline{long-2014} propuseram o uso de uma \ac{FCN} para fazer segmentação semântica e conseguiram obter resultados superiores ao estado da arte, utilizando camadas de deconvolução para aumentar a resolução dos mapas de filtros gerados na saída da \ac{CNN}. \citeonline{noh:2015} propuseram um trabalho mais avançado de forma a tratar algumas limitações encontradas por \citeonline{long-2014}. Essa arquitetura funciona com a estrutura de um \textit{autoencoder}, usando as camadas de deconvolução que não servem para aumentar a resolução, mas para recuperar as informações da imagem de forma mais refinada, de forma a melhorar os resultados da segmentação.
+
+%%% p2 Escrever sobre os resultados obtidos pelas CNNs em Localização de Objetos
+Nas tarefas de localização de objetos as \ac{CNN}s também têm se destacado com bons resultados. \citeonline{redmon-2015} propuseram o \ac{YOLO} e obtiveram um bom resultado fazendo localização e classificação de objetos em tempo real, conseguindo processar 45 \ac{FPS} com uma \ac{mAP} de 63,4\%. \citeonline{sren-2017} propuseram o \ac{R-CNN} e conseguiram obter resultados significativamente melhores para as tarefas de localização e classificação chegando a uma \ac{mAP} de até 78,8\%. Numa implementação alternativa com o enfoque no processamento em tempo real, a \ac{mAP} cai um pouco, chegando a 73,2\% porém, ele processa apenas 7 \ac{FPS}. Outros trabalhos que se destacam em localização e classificação de objetos é o \ac{SSD} e o \ac{DSSD}. As Seções \ref{secao:3:2} e \ref{secao:3:3} falam mais sobre eles.
+
 \subsection{Regularização}
 \label{subsecao:2:3:2}
 
@@ -152,7 +159,24 @@ Por fim, as camadas completamente conexas são exatamente iguais às redes MLP e
 
 \citeonline{goodfellow-2016} definem que uma das principais formas de evitar o \textit{Overfitting} são as técnicas de regularização. Essas técnicas criam certas restrições dentro do modelo, e essas restrições dificultam a ocorrência do \textit{Overfitting}.
 
-\citeonline{ioffe-2015} propuzeram uma técnica de regularização que se ajustou muito bem em redes neurais convolutivas e melhoraram os resultados da \textit{Inception} \cite{szegedy-2015} no desafio da \ac{ILSVRC}. Essa Técnica foi o \textit{Batch Normalization}, e ela consiste, basicamente em subtrair a média do lote de processamento da função de ativação, e dividir o resultado pelo desvio padrão. Desde que proposto, o \textit{Batch Normalization} se tornou presente nas arquiteturas mais profundas que surgiram depois, como \ac{ResNet} \cite{he-2016} e \ac{DenseNet} \cite{liu-2017}.
+\citeonline{ioffe-2015} propuseram uma técnica de regularização que se ajustou muito bem em redes neurais convolutivas e melhoraram os resultados da \textit{Inception} \cite{szegedy-2015} no desafio da \ac{ILSVRC}. Essa Técnica foi o \textit{Batch Normalization}, e ela consiste, basicamente em subtrair a média do lote de processamento da função de ativação, e dividir o resultado pelo desvio padrão. Desde que proposto, o \textit{Batch Normalization} se tornou presente nas arquiteturas mais profundas que surgiram depois, como \ac{ResNet} \cite{he-2016} e \ac{DenseNet} \cite{liu-2017}.
+
+\citeonline{shorten-2019} definem que uma outra forma de resolver o problema do \textit{Overfitting} é tratar o problema em sua raíz: o conjunto de dados. Uma das principais causas do \textit{Overfitting} é uma base de dados pequena ou desbalanceada. Sendo assim, a principal forma de tratar o \textit{Overfitting} na basede dados é o \textit{Data Augmentation}. Essa técnica consiste em gerar dados artificiais com base nos dados reais. Em imagens, fazer \textit{Data Augmentation} é relativamente simples, pois, você pode aplicar diversas transformações em uma mesma imagem, e o \textit{ground-truth} normalmente será o mesmo. Em algumas tarefas, como segmentação ou localização, para fazer \textit{Data Augmentation} as transformações especiais que a imagem sofre (como corte ou \textit{zoom}) precisam ser aplicadas também no  \textit{ground-truth}. A Figura \ref{fig:data-aug} mostra exemplos de \textit{Data Augmentation} quando são aplicadas transformações nas cores da imagem.
+
+
+  \begin{figure}[H]
+  % Alterar espaçamentos antes e depois do caption
+  \setlength{\abovecaptionskip}{0pt}
+  \setlength{\belowcaptionskip}{0pt}
+  % Caption
+  \caption[Exemplos de \textit{Data Augmentation}]{Exemplos de \textit{Data Augmentation}}
+  \centering
+  \includegraphics[width=.5\textwidth]{imagem/0x_data-augmentation.png}
+% Caption centralizada
+  \captionsetup{justification=centering}
+  \captionfont{\small{\textbf{\\Fonte: \citeonline{shorten-2019}}}}	
+  \label{fig:data-aug}
+ \end{figure}
 
 %% Citar para falar de data augmentation. https://journalofbigdata.springeropen.com/articles/10.1186/s40537-019-0197-0
 %%%%%%%%%%%%%%%%%%% Formato para a inserção de figuras
