@@ -68,7 +68,7 @@ O motivo é que, embora a \ac{DenseNet} possua as mesmas características de \te
 
 Além dessas modificações, é necessário mudar algumas coisas na arquitetura da rede \ac{DenseNet}121. A primeira delas é que a SSD utiliza ramificações de diferentes níveis para fazer as predições de forma mais precisa. Sendo assim, a primeira alteração é que no segundo bloco de transição é criada uma ramificação fazendo regularização L2. Além disso, a camada de \textit{pooling} do último bloco de transição é substituída por um bloco $3\times3$ com strides igual a 1. No final da rede as camadas de \textit{pooling} global e softmax são removidas e essa saída é a segunda ramificação da \ac{SSD}. Depois disso, são adicionados mais dois blocos com camadas de convolução, uma $1\times1$ seguida de um $3\times3$ com \textit{stride} 2. Por fim, mais dois blocos, com as mesmas camadas, porém, as camadas $3\times3$ com \textit{stride} igual a 1. A Figura \ref{fig:dense_ssd} mostra a nova arquitetura da rede. Os blocos brancos representam as partes da implementação original da \ac{DenseNet}121, os blocos azuis representam as modificações propostas por \citeonline{wei-2015} e os blocos laranjados representam as modificações propostas por \citeonline{cheng-2017}.
 
-\begin{figure}[H]
+\begin{figure}[t]
 	% Alterar espaçamentos antes e depois do caption
 	\setlength{\abovecaptionskip}{0pt}
 	\setlength{\belowcaptionskip}{0pt}

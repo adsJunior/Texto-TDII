@@ -145,7 +145,16 @@ As camadas de \textit{pooling} são utilizadas para reduzir a dimensão de dados
 
 Por fim, as camadas completamente conexas são exatamente iguais às redes MLP e é comum utilizá-las no final da rede para conectar à saída. Seu acréscimo no final é importante pois faz a ligação de todos os filtros \cite{ferreira-2017}. As arquiteturas de \ac{CNN}s geralmente intercalam algumas camadas de convolução com uma camada de \textit{pooling}. As arquiteturas mais antigas costumavam adicionar camadas completamente conexas ao final, porém, os modelos mais novos, como a \ac{ResNet} e a \ac{DenseNet} já não usam mais esse conceito.
 
+\subsection{Regularização}
+\label{subsecao:2:3:2}
 
+\citeonline{caelles-2017} definem que um grande problema de trabalhar com modelos de \textit{Deep Learning} é a necessidade de um grande volume de dados para que o modelo possa generalizar bem. Do contrário, pode acontecer \textit{Overfitting}. Em \textit{Deep Learning}, \textit{Overfitting} é quando o modelo aprende a resolver o problema apenas no conjunto de dados de treinamento, isto é, gera uma solução pouco genérica.
+
+\citeonline{goodfellow-2016} definem que uma das principais formas de evitar o \textit{Overfitting} são as técnicas de regularização. Essas técnicas criam certas restrições dentro do modelo, e essas restrições dificultam a ocorrência do \textit{Overfitting}.
+
+\citeonline{ioffe-2015} propuzeram uma técnica de regularização que se ajustou muito bem em redes neurais convolutivas e melhoraram os resultados da \textit{Inception} \cite{szegedy-2015} no desafio da \ac{ILSVRC}. Essa Técnica foi o \textit{Batch Normalization}, e ela consiste, basicamente em subtrair a média do lote de processamento da função de ativação, e dividir o resultado pelo desvio padrão. Desde que proposto, o \textit{Batch Normalization} se tornou presente nas arquiteturas mais profundas que surgiram depois, como \ac{ResNet} \cite{he-2016} e \ac{DenseNet} \cite{liu-2017}.
+
+%% Citar para falar de data augmentation. https://journalofbigdata.springeropen.com/articles/10.1186/s40537-019-0197-0
 %%%%%%%%%%%%%%%%%%% Formato para a inserção de figuras
 
 %  \begin{figure}[H]

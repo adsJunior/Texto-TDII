@@ -10,7 +10,7 @@ Neste capítulo serão apresentados os trabalhos na literatura que possuem rela�
 
 Como mencionado anteriormente, desde 2012 as tarefas de classificação de imagens são resolvidas majoritariamente por arquiteturas de \textit{Deep Learning}. Em \citeyear{he-2016}, \citeauthor{he-2016} propuseram a \ac{ResNet} que introduziam o conceito de \textit{skip connection}. Uma \textit{skip connection} é quando a camada $C_n$ além de se conectar com a camada $C_{n+1}$ ela se conecta com outra mais a frente - no caso da \textit{\ac{ResNet}}, a camada $C_{n+3}$. Sendo assim, a camada $C_{n+3}$ recebe em suas entradas uma junção das saídas de $C_{n}$ e $C_{n+2}$. Essa combinação de entradas na \ac{ResNet} foi feita como uma soma de matrizes. A Figura \ref{fig:blocoresidual} mostra um exemplo de \textit{skip connection} na \textit{\ac{ResNet}}.
 
-\begin{figure}[H]
+\begin{figure}[t]
 	% Alterar espaçamentos antes e depois do caption
 	\setlength{\abovecaptionskip}{0pt}
 	\setlength{\belowcaptionskip}{0pt}
@@ -28,7 +28,7 @@ Seguindo a mesma ideia de \textit{skip connection} proposta por \citeonline{he-2
 
 A Figura \ref{fig:blocodenso} mostra como se conectam as camadas na \ac{DenseNet}. Supondo que temos um bloco denso $B$ com um conjunto de 5 camadas $C = \{c_1, c_2, c_3, c_4, c_5\}$. Como explicado no parágrafo anterior, a saída das camadas serão utilizadas em todas as camadas subsequentes no mesmo bloco. Sendo assim, a entrada de $c_3$ será composta pelas saídas de $c_1$ e $c_2$ concatenadas, e assim sucessivamente. Além disso, como as saídas são concatenadas e não somadas, a tendência é que as entradas cresçam a medida que a rede se aprofunda. O conceito de bloco denso permite propagar múltiplos níveis de abstração ao longo de toda a rede, melhorando assim os resultados obtidos \cite{liu-2017}.
 
-\begin{figure}[H]
+\begin{figure}[t]
 	% Alterar espaçamentos antes e depois do caption
 	\setlength{\abovecaptionskip}{0pt}
 	\setlength{\belowcaptionskip}{0pt}
@@ -42,17 +42,15 @@ A Figura \ref{fig:blocodenso} mostra como se conectam as camadas na \ac{DenseNet
 	\label{fig:blocodenso}
 \end{figure} 
 
-Sendo assim, se cada camada do bloco possui uma saída de $x$ matrizes, o bloco possui $n$ camadas e a entrada do bloco possui tamanho $a$, a saída possuirá o tamanho representado pela Equação~\ref{eq:eq8}:
+Sendo assim, se cada camada do bloco possui uma saída de $x$ matrizes, o bloco possui $n$ camadas e a entrada do bloco possui tamanho $a$, a saída possuirá o tamanho representado pela Equação~\ref{eq:eq8}. Vale mencionar que o valor de $x$ se conserva para toda a rede.
 
 \begin{equation}
 	\label{eq:eq8}	y = n x + a
 \end{equation}
 
-Vale mencionar que o valor de $x$ se conserva para toda a rede. Uma vantagem de usar blocos densos é a possibilidade de propagar informações com diversos níveis de abstração ao longo de toda a rede.
-
 As \ac{DenseNet}s seguem um padrão arquitetural muito similar ao das \ac{ResNet}s começando a rede com uma camada de convolução $7\times7$ com \textit{strides} de $2\times2$ que é sucedida por uma camada de \textit{batch normalization} e outra de \ac{ReLU}. Depois disso, têm uma camada de \textit{pooling} pelo máximo e após essa camada, têm quatro blocos densos intercalados por blocos intermediários. Os blocos de convolução dentro dos blocos densos são compostos por uma camada de convolução $1\times1$ (que \citeonline{liu-2017} definem como camada de ``gargalo'') e uma camada de convolução $3\times3$. Vale mencionar que todas as camadas de convolução nos blocos densos são precedidas por uma camada de \textit{batch normalization} e \ac{ReLU}. Os blocos intermediários são compostos por uma camada de convolução $1\times1$ seguida de uma camada de \textit{pooling} pela média (que também é precedida por \textit{batch normalization} e \ac{ReLU}). No final dos 4 blocos densos, a rede possui mais uma camada de \textit{batch normalization} e \ac{ReLU} seguida por um \textit{pooling} pela média global e uma camada completamente conectada que faz a classificação. A Figura \ref{fig:archdensenet} mostra como é a arquitetura da rede.
 
-\begin{figure}[H]
+\begin{figure}[t]
 	% Alterar espaçamentos antes e depois do caption
 	\setlength{\abovecaptionskip}{0pt}
 	\setlength{\belowcaptionskip}{0pt}
@@ -77,7 +75,7 @@ A abordagem consiste em utilizar a rede VGG16 \cite{simonyan-2014} como arquitet
 
 A Figura \ref{fig:yoloxssd} mostra as diferenças entre as arquiteturas \ac{YOLO} e \ac{SSD}. Enquanto \citeonline{redmon-2015} usaram uma camada completamente conectada intermediária para fazer a localização dos objetos, \citeonline{wei-2015} usaram camadas de convolução sobre mapas de múltiplos tamanhos. Além disso, o \ac{SSD} trabalha com \textit{bounding-boxes} de tamanhos padrões $\{1, 2, 3, \frac{1}{2}, \frac{1}{3}\}$. Os filtros de convolução adicionais, os tamanhos padrões de \textit{bounding-boxes} e o uso de \textit{data-augmentation} foram cruciais na obtenção dos bons resultados.
 
-  \begin{figure}[H]
+  \begin{figure}[t]
 	% Alterar espaçamentos antes e depois do caption
 	\setlength{\abovecaptionskip}{0pt}
 	\setlength{\belowcaptionskip}{0pt}
@@ -99,7 +97,7 @@ A Figura \ref{fig:yoloxssd} mostra as diferenças entre as arquiteturas \ac{YOLO
 A Figura \ref{fig:ssdxdssd} mostra as arquiteturas da \ac{SSD} e \ac{DSSD} mostrando as suas diferenças. É possível visualizar que a rede \ac{DSSD} utiliza as saídas da \ac{SSD} como entrada aos módulos de deconvolução.
 
 
-\begin{figure}[H]
+\begin{figure}[t]
 	% Alterar espaçamentos antes e depois do caption
 	\setlength{\abovecaptionskip}{0pt}
 	\setlength{\belowcaptionskip}{0pt}
@@ -116,7 +114,7 @@ A Figura \ref{fig:ssdxdssd} mostra as arquiteturas da \ac{SSD} e \ac{DSSD} mostr
 %Rever essa parte
 Nesse trabalho, foram propostas duas alterações principais no modelo \ac{SSD}. A primeira delas foi a utilização da rede neural ResNet-101 \cite{he-2016}. \citeonline{cheng-2017} perceberam, porém, que apenas substituir a VGG16 pela \ac{ResNet} não produziria resultados melhores. Sendo assim, após adicionar as camadas de convolução do \ac{SSD} para fazer a detecção em múltiplos níveis, ele adicionou um módulo com mais algumas camadas de convolução a fim de melhorar os resultados. Os módulos propostos estão na Figura \ref{fig:ssdpred}.
 
-\begin{figure}[H]
+\begin{figure}[t]
 	% Alterar espaçamentos antes e depois do caption
 	\setlength{\abovecaptionskip}{0pt}
 	\setlength{\belowcaptionskip}{0pt}
@@ -134,7 +132,7 @@ Fazendo os testes, \citeonline{cheng-2017} perceberam que os melhores resultados
 
 Tendo isso em vista, após a implementação dos módulos \ac{SSD} na \ac{ResNet}101, \citeonline{cheng-2017} decidiram adicionar módulos usando camadas de deconvolução com o intuito de fazer um \textit{upsample} nas saídas da \ac{SSD} para obter mais dados. Depois de adicionar esses módulos, eles são combinados com o módulo \ac{SSD} anterior para gerar a nova saída. A Figura \ref{fig:deconv} mostra como é feita essa combinação.
 
-\begin{figure}[H]
+\begin{figure}[t]
 	% Alterar espaçamentos antes e depois do caption
 	\setlength{\abovecaptionskip}{0pt}
 	\setlength{\belowcaptionskip}{0pt}
@@ -199,7 +197,7 @@ O desafio de Localização e Classificação de objetos desde 2007 possui 20 cla
 
 Analisando a tabela é possível perceber que a base é desbalanceada. A classe pessoa, por exemplo, está presente em mais de 1000 imagens e tem mais de 2000 instâncias apenas no conjunto de treinamento. Enquanto isso, a classe ovelha aparece apenas 130 vezes em 48 imagens no conjunto de treinamento. Esse desbalanceamento pode ser um desafio durante o treinamento caso o modelo não seja robusto. A Figura \ref{fig:pascal2007} mostra exemplos das classes presentes na \ac{PASCAL VOC} 2007.
 
-\begin{figure}[H]
+\begin{figure}[t]
 	% Alterar espaçamentos antes e depois do caption
 	\setlength{\abovecaptionskip}{0pt}
 	\setlength{\belowcaptionskip}{0pt}

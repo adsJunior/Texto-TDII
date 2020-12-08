@@ -12,7 +12,7 @@ O processamento digital de imagens contribui para a descoberta de informação v
 
 A Figura \ref{fig:exemploclassdet} mostra exemplos de como devem ser as saídas de um algoritmo de classificação e localização de objetos. Os retângulos destacados em torno dos objetos são resultados do algoritmo de localização que determina que dentro daquela região existe um objeto de interesse e os rótulos destacados em cima dos retângulos são os resultados do algoritmo de classificação, que determina que o objeto contido dentro da região pertence àquela classe.
 
-  \begin{figure}[H]
+  \begin{figure}[t!]
 % Alterar espaçamentos antes e depois do caption
   \setlength{\abovecaptionskip}{0pt}
   \setlength{\belowcaptionskip}{0pt}
@@ -31,10 +31,10 @@ O uso das \ac{CNN} tem se tornado cada vez mais populares, principalmente em alg
 %%% p1 Escrever sobre os resultados obtidos pelas CNNs em classificação de imagens
 Contudo, as \ac{CNN} só passaram a ser utilizadas com mais frequência algum tempo depois. \citeonline{deng-2009} lançaram o ImageNet, uma base de dados de larga escala com mais de 14 milhões de imagens anotadas manualmente divididas em mais de 22 mil classes diferentes. Essa base de imagens pode ser usada para as tarefas de classificação, detecção e localização de objetos. Além disso, \citeonline{deng-2009} também lançaram o \ac{ILSVRC}, uma competição global anual, aonde os competidores são avaliados nas tarefas de classificação de imagens, detecção de objetos e localização de objetos. \citeonline{krizhevsky-2012} alcançaram o melhor resultado no \ac{ILSVRC} de 2012 usando a AlexNet - uma \ac{CNN} - e desde então, as \ac{CNN}s obtém sempre os melhores resultados nos desafios.
 
+% Resumir essa parte. Caso seja necessário apresentar esses conteúdos, escrever no Referencial Teórico ou nos trabalhos relacionados. COMEÇO
 %%% p3 Escrever sobre os resultados obtidos pelas CNNs em Segmentação semantica usando deconvolução
 Uma outra área impactada pelo uso das \ac{CNN}s é a área de segmentação semântica. \citeonline{long-2014} propuseram o uso de uma \ac{FCN} para fazer segmentação semântica e conseguiram obter resultados superiores ao estado da arte, utilizando camadas de deconvolução para aumentar a resolução dos mapas de filtros gerados na saída da \ac{CNN}. \citeonline{noh:2015} propuseram um trabalho mais avançado de forma a tratar algumas limitações encontradas por \citeonline{long-2014}. Essa arquitetura funciona com a estrutura de um \textit{autoencoder}, usando as camadas de deconvolução que não servem para aumentar a resolução, mas para recuperar as informações da imagem de forma mais refinada, de forma a melhorar os resultados da segmentação.
 
-% Resumir essa parte. Caso seja necessário apresentar esses conteúdos, escrever no Referencial Teórico ou nos trabalhos relacionados. COMEÇO
 %%% p2 Escrever sobre os resultados obtidos pelas CNNs em Localização de Objetos
 Nas tarefas de localização de objetos as \ac{CNN}s também têm se destacado com bons resultados. \citeonline{redmon-2015} propuseram o \ac{YOLO} e obtiveram um bom resultado fazendo localização e classificação de objetos em tempo real, conseguindo processar 45 \ac{FPS} com uma \ac{mAP} de 63,4\%. \citeonline{sren-2017} propuseram o \ac{R-CNN} e conseguiram obter resultados significativamente melhores para as tarefas de localização e classificação chegando a uma \ac{mAP} de até 78,8\%. Numa implementação alternativa com o enfoque no processamento em tempo real, a \ac{mAP} cai um pouco, chegando a 73,2\% porém, ele processa apenas 7 \ac{FPS}.
 
